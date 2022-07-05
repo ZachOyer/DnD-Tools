@@ -12,6 +12,7 @@ import { InformationSheetComponent } from './information-sheet/information-sheet
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EditBasicInfoModalComponent } from './edit-info-modals/edit-basic-info-modal/edit-basic-info-modal.component';
 import { EditStatsModalComponent } from './edit-info-modals/edit-stats-modal/edit-stats-modal.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { EditStatsModalComponent } from './edit-info-modals/edit-stats-modal/edi
     FormsModule,
     AppRoutingModule,
     RouterModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

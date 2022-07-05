@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
+import { faDiceD20, faLink, faPersonBreastfeeding } from '@fortawesome/free-solid-svg-icons';
 import { appAnimations, introAnimations } from './app-animation';
 
 @Component({
@@ -10,6 +10,7 @@ import { appAnimations, introAnimations } from './app-animation';
 })
 export class AppComponent {
   faDnD = faDiceD20;
+  faGit = faLink;
   currentTab: number;
   isGreen = 'true';
   title = 'DnD Tools';

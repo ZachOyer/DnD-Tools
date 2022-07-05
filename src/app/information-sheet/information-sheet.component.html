@@ -1,24 +1,43 @@
 <h1 class="title-text">Character Info</h1>
 <div class="container">
   <div class="row mb-2" style="height: 15vh;">
-    <div class="basic-info">
-      <fa-icon class="edit-button" [icon]="faEdit"></fa-icon>
-      <h3>Basic Info</h3>
+    <div class="section">
+      <div id="section-bar">
+        <fa-icon class="edit-button" [icon]="faEdit"></fa-icon>
+        <h3>Basic Info</h3>
+      </div>
       <div class="row">
-        <div class="col">
+        <div class="col curtains">
           Character Name
         </div>
-        <div class="col">
+        <div class="col curtains">
           Class & Level
         </div>
-        <div class="col">
+        <div class="col curtains">
           Race
         </div>
-        <div class="col">
+        <div class="col curtains">
           Background
         </div>
-        <div class="col">
+        <div *ngIf="currentCharacter?.alignment" class="col curtains">
           Alignment
+        </div>
+      </div>
+      <div class="row" style="margin-top: 5px">
+        <div class="col text-info">
+          {{currentCharacter?.name}}
+        </div>
+        <div class="col text-info">
+          lvl {{currentCharacter?.level}} {{currentCharacter?.class}}
+        </div>
+        <div class="col text-info">
+          {{currentCharacter?.race}}
+        </div>
+        <div class="col text-info">
+          {{currentCharacter?.background}}
+        </div>
+        <div *ngIf="currentCharacter?.alignment" class="col text-info">
+          {{currentCharacter?.alignment}}
         </div>
       </div>
     </div>
@@ -26,15 +45,17 @@
   <div class="row" style="height: 60vh;">
     <div class="col" style="margin-right: 3px;">
       <div class="row" style="height: 100%">
-        <div class="stats">
-          <fa-icon class="edit-button" [icon]="faEdit"></fa-icon>
-          <h3>Stats</h3>
+        <div class="section">
+          <div id="section-bar">
+            <fa-icon class="edit-button" [icon]="faEdit"></fa-icon>
+            <h3>Stats</h3>
+          </div>
           <table class="table">
             <thead>
-              <tr class="table-primary">
-                <th scope="col">Attr</th>
+              <tr style="background-color: #281648">
+                <th scope="col">Attribute</th>
                 <th scope="col">Amount</th>
-                <th scope="col">Mod</th>
+                <th scope="col">Modifier</th>
               </tr>
             </thead>
             <tbody>
@@ -75,15 +96,19 @@
     </div>
     <div class="col" style="margin-left: 3px">
       <div class="row mb-2" style="height: 30%">
-        <div class="battle-stats">
-          <fa-icon class="edit-button" [icon]="faEdit"></fa-icon>
-          <h3>Battle Stats</h3>
+        <div class="section">
+          <div id="section-bar">
+            <fa-icon class="edit-button" [icon]="faEdit"></fa-icon>
+            <h3>Battle Stats</h3>
+          </div>
         </div>
       </div>
       <div class="row" style="height: 70%;">
-        <div class="other-info">
-          <fa-icon class="edit-button" [icon]="faEdit"></fa-icon>
-          <h3>Other Info</h3>
+        <div class="section">
+          <div id="section-bar">
+            <fa-icon class="edit-button" [icon]="faEdit"></fa-icon>
+            <h3>Other Info</h3>
+          </div>
         </div>
       </div>
     </div>

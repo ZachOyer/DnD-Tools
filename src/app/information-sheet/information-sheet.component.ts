@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faArrowUpWideShort, faBrain, faFilePen, faHandFist, faHatWizard, faHeart, faMasksTheater, faPencil, faPencilAlt, faPencilSquare, faPersonRunning, faScroll, faShieldHalved } from '@fortawesome/free-solid-svg-icons';
+import { HttpClient } from '@angular/common/http';
+import { Character } from '../shared/character';
 
 @Component({
   selector: 'app-information-sheet',
@@ -16,10 +18,23 @@ export class InformationSheetComponent implements OnInit {
   faProfBonus = faArrowUpWideShort;
   faEdit = faFilePen;
 
+  currentCharacter: any;
 
-  constructor() { }
+
+  constructor(private http: HttpClient) {
+    this.currentCharacter = undefined;
+  }
 
   ngOnInit(): void {
+    this.getCharacterInfo();
+  }
+
+  getCharacterInfo() {
+    this.http.get('../assets/character-info.json')
+    .subscribe((resp: any) => {
+      this.currentCharacter = <Character>(resp.characters[0]);
+    }
+    )
   }
 
 }
