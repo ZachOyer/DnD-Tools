@@ -1,16 +1,33 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DiceRollerComponent } from './dice-roller/dice-roller.component';
+import { InformationSheetComponent } from './information-sheet/information-sheet.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EditBasicInfoModalComponent } from './edit-info-modals/edit-basic-info-modal/edit-basic-info-modal.component';
+import { EditStatsModalComponent } from './edit-info-modals/edit-stats-modal/edit-stats-modal.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DiceRollerComponent,
+    InformationSheetComponent,
+    EditBasicInfoModalComponent,
+    EditStatsModalComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    FormsModule,
+    AppRoutingModule,
+    RouterModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

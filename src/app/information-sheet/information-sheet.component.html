@@ -1,0 +1,91 @@
+<h1 class="title-text">Character Info</h1>
+<div class="container">
+  <div class="row mb-2" style="height: 15vh;">
+    <div class="basic-info">
+      <fa-icon class="edit-button" [icon]="faEdit"></fa-icon>
+      <h3>Basic Info</h3>
+      <div class="row">
+        <div class="col">
+          Character Name
+        </div>
+        <div class="col">
+          Class & Level
+        </div>
+        <div class="col">
+          Race
+        </div>
+        <div class="col">
+          Background
+        </div>
+        <div class="col">
+          Alignment
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="height: 60vh;">
+    <div class="col" style="margin-right: 3px;">
+      <div class="row" style="height: 100%">
+        <div class="stats">
+          <fa-icon class="edit-button" [icon]="faEdit"></fa-icon>
+          <h3>Stats</h3>
+          <table class="table">
+            <thead>
+              <tr class="table-primary">
+                <th scope="col">Attr</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Mod</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><fa-icon [icon]="faStr"></fa-icon> Str</th>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr class="table-dark">
+                <th scope="row"><fa-icon [icon]="faDex"></fa-icon> Dex</th>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row"><fa-icon [icon]="faCon"></fa-icon> Con</th>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr class="table-dark">
+                <th scope="row"><fa-icon [icon]="faInt"></fa-icon> Int</th>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row"><fa-icon [icon]="faWis"></fa-icon> Wis</th>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr class="table-dark">
+                <th scope="row"><fa-icon [icon]="faCha"></fa-icon> Cha</th>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col" style="margin-left: 3px">
+      <div class="row mb-2" style="height: 30%">
+        <div class="battle-stats">
+          <fa-icon class="edit-button" [icon]="faEdit"></fa-icon>
+          <h3>Battle Stats</h3>
+        </div>
+      </div>
+      <div class="row" style="height: 70%;">
+        <div class="other-info">
+          <fa-icon class="edit-button" [icon]="faEdit"></fa-icon>
+          <h3>Other Info</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
