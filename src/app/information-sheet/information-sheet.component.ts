@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { faArrowUpWideShort, faBrain, faFilePen, faHandFist, faHatWizard, faHeart, faMasksTheater, faPencil, faPencilAlt, faPencilSquare, faPersonRunning, faScroll, faShieldHalved } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpWideShort, faBolt, faBrain, faFilePen, faHandFist, faHatWizard, faHeart, faHeartPulse, faMasksTheater, faPencil, faPencilAlt, faPencilSquare, faPersonHiking, faPersonRunning, faScroll, faShield, faShieldHalved } from '@fortawesome/free-solid-svg-icons';
 import { HttpClient } from '@angular/common/http';
-import { Character } from '../shared/character';
+import { Character } from '../shared/character.model';
+import { CharacterService } from '../character/character.service';
 
 @Component({
   selector: 'app-information-sheet',
@@ -9,6 +10,8 @@ import { Character } from '../shared/character';
   styleUrls: ['./information-sheet.component.sass']
 })
 export class InformationSheetComponent implements OnInit {
+  private charactersUrl = 'api/characters/'
+
   faStr = faHandFist;
   faDex = faPersonRunning;
   faCon = faHeart;
@@ -17,24 +20,29 @@ export class InformationSheetComponent implements OnInit {
   faCha = faMasksTheater;
   faProfBonus = faArrowUpWideShort;
   faEdit = faFilePen;
+  faAC = faShield;
+  faMovement = faPersonHiking;
+  faInitiative = faBolt;
+  faHealth = faHeart;
 
+  currentCharacterIndex: number;
   currentCharacter: any;
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private charService: CharacterService) {
     this.currentCharacter = undefined;
+    this.currentCharacterIndex = 0;
   }
 
   ngOnInit(): void {
-    this.getCharacterInfo();
+    this.charService.getCharacters().subscribe((data: Character[]) => {
+      this.currentCharacter = data[this.currentCharacterIndex];
+    })
   }
 
-  getCharacterInfo() {
-    this.http.get('../assets/character-info.json')
-    .subscribe((resp: any) => {
-      this.currentCharacter = <Character>(resp.characters[0]);
-    }
-    )
+  testChange() {
+    this.currentCharacter.name = "Thunker"
+    this.charService.editCharacters(this.currentCharacter)
   }
-
 }

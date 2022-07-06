@@ -1,7 +1,8 @@
- import { Attack } from "./attack";
+import { Attack } from "./attack";
 
 export interface Character {
   // Basic info
+  id: number;
   name: string;
   class: string;
   level: number;

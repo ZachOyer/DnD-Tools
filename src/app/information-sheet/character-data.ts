@@ -1,4 +1,4 @@
-import { Character } from "../shared/character";
+import { Character } from "../shared/character.model";
 
 export class CharacterData {
   characters: Character[] = [

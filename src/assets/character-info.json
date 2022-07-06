@@ -20,10 +20,6 @@
       "armorClass": 13,
       "initiative": 0,
       "speed": 30
-    },
-    {
-      "id": 1,
-      "name": "Andy"
     }
   ]
 }
