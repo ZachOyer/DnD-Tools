@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faArrowUpWideShort, faBolt, faBrain, faFilePen, faHandFist, faHatWizard, faHeart, faHeartPulse, faMasksTheater, faPencil, faPencilAlt, faPencilSquare, faPersonHiking, faPersonRunning, faScroll, faShield, faShieldHalved } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsDownToPeople, faArrowUpWideShort, faBolt, faBrain, faCircleCheck, faFilePen, faFloppyDisk, faHandFist, faHatWizard, faHeart, faHeartPulse, faMasksTheater, faPencil, faPencilAlt, faPencilSquare, faPersonHiking, faPersonRunning, faScroll, faShield, faShieldHalved } from '@fortawesome/free-solid-svg-icons';
 import { HttpClient } from '@angular/common/http';
-import { Character } from '../shared/character.model';
 import { CharacterService } from '../character/character.service';
 
 @Component({
@@ -10,7 +9,6 @@ import { CharacterService } from '../character/character.service';
   styleUrls: ['./information-sheet.component.sass']
 })
 export class InformationSheetComponent implements OnInit {
-  private charactersUrl = 'api/characters/'
 
   faStr = faHandFist;
   faDex = faPersonRunning;
@@ -20,29 +18,59 @@ export class InformationSheetComponent implements OnInit {
   faCha = faMasksTheater;
   faProfBonus = faArrowUpWideShort;
   faEdit = faFilePen;
+  faSave = faCircleCheck;
   faAC = faShield;
   faMovement = faPersonHiking;
   faInitiative = faBolt;
   faHealth = faHeart;
+  faSelectChar = faArrowsDownToPeople;
+
+  basicEdit = false;
+  statsEdit = false;
+  battleEdit = false;
+  otherEdit = false;
 
   currentCharacterIndex: number;
-  currentCharacter: any;
+  characters: any;
 
 
   constructor(private http: HttpClient,
               private charService: CharacterService) {
-    this.currentCharacter = undefined;
+    this.characters = undefined;
     this.currentCharacterIndex = 0;
   }
 
   ngOnInit(): void {
-    this.charService.getCharacters().subscribe((data: Character[]) => {
-      this.currentCharacter = data[this.currentCharacterIndex];
-    })
+    this.characters = this.charService.getCharacters();
+    this.currentCharacterIndex = this.charService.getCurrentCharacterIndex();
   }
 
-  testChange() {
-    this.currentCharacter.name = "Thunker"
-    this.charService.editCharacters(this.currentCharacter)
+  getMod(stat: number): number {
+    return Math.floor(stat / 2) - 5;
+  }
+
+  setCurrentCharacter(index: string) {
+    this.charService.setCurrentCharacterIndex(Number(index));
+    this.currentCharacterIndex = Number(index);
+  }
+
+  changeBasicInfo() {
+    console.log("Trying to change basic info")
+    this.basicEdit = !this.basicEdit;
+  }
+
+  changeStats() {
+    console.log("Trying to change stats")
+    this.statsEdit = !this.statsEdit;
+  }
+
+  changeBattleStats() {
+    console.log("Trying to change battle stats")
+    this.battleEdit = !this.battleEdit;
+  }
+
+  changeOtherInfo() {
+    console.log("Trying to change other info")
+    this.otherEdit = !this.otherEdit;
   }
 }

@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemCharService } from 'src/app/character/character-database';
 import { CharacterService } from './character/character.service';
+import { CharacterCreationComponent } from './character-creation/character-creation.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CharacterService } from './character/character.service';
     InformationSheetComponent,
     EditBasicInfoModalComponent,
     EditStatsModalComponent,
+    CharacterCreationComponent,
   ],
   imports: [
     BrowserModule,

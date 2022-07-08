@@ -26,12 +26,11 @@ export class DiceRollerComponent implements OnInit {
 
   diceSize: number = 20;
   description: string = "";
-  diceValue: number = -1;
+  diceValue: number = -100;
   criticalHit: boolean = false;
   criticalMiss: boolean = false;
   modifier: number = 0;
   rollType: string = 'ok'
-
   constructor() { }
 
   ngOnInit(): void {
@@ -83,7 +82,7 @@ export class DiceRollerComponent implements OnInit {
     if (this.diceSize === 20) {
       this.checkTags(Math.max(firstRoll, secondRoll));
     }
-    this.diceValue = Math.max(firstRoll, secondRoll);
+    this.diceValue = Math.max(firstRoll, secondRoll) + this.modifier;
     this.description = `max ( ${firstRoll} , ${secondRoll} ) + ${this.modifier} = ${this.diceValue}`
     this.setRollType();
   }
@@ -94,7 +93,7 @@ export class DiceRollerComponent implements OnInit {
     if (this.diceSize === 20) {
       this.checkTags(Math.min(firstRoll, secondRoll));
     }
-    this.diceValue = Math.min(firstRoll, secondRoll);
+    this.diceValue = Math.min(firstRoll, secondRoll) + this.modifier;
     this.description = `min ( ${firstRoll} , ${secondRoll} ) + ${this.modifier} = ${this.diceValue}`
     this.setRollType();
   }

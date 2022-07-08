@@ -6,9 +6,10 @@ export interface Character {
   name: string;
   class: string;
   level: number;
-  background?: string | null;
-  race: string | null;
-  alignment?: string | null;
+  background?: string;
+  race: string;
+  alignment?: string;
+  xp?: number;
 
   // Stats
   strength: number;
