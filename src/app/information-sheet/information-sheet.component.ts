@@ -43,6 +43,7 @@ export class InformationSheetComponent implements OnInit {
   ngOnInit(): void {
     this.characters = this.charService.getCharacters();
     this.currentCharacterIndex = this.charService.getCurrentCharacterIndex();
+    document.documentElement.style.setProperty("--duration", "2s");
   }
 
   getMod(stat: number): number {
@@ -54,23 +55,44 @@ export class InformationSheetComponent implements OnInit {
     this.currentCharacterIndex = Number(index);
   }
 
+  changeHealth(change: number) {
+    if (this.characters[this.currentCharacterIndex].hitPoints + change > this.characters[this.currentCharacterIndex].maxHitPoints) {
+      this.characters[this.currentCharacterIndex].hitPoints = this.characters[this.currentCharacterIndex].maxHitPoints
+    } else if (this.characters[this.currentCharacterIndex].hitPoints + change < 0) {
+      this.characters[this.currentCharacterIndex].hitPoints = 0
+    } else {
+      this.characters[this.currentCharacterIndex].hitPoints += change;
+    }
+  }
+
+  calcHealth(): string {
+    if (this.characters[this.currentCharacterIndex].hitPoints == 0) {
+      return '';
+    }
+    if (this.characters[this.currentCharacterIndex].hitPoints / this.characters[this.currentCharacterIndex].maxHitPoints < 0.5) {
+      if (this.characters[this.currentCharacterIndex].hitPoints / this.characters[this.currentCharacterIndex].maxHitPoints < 0.2) {
+        document.documentElement.style.setProperty("--duration", "1s");
+      } else {
+        document.documentElement.style.setProperty("--duration", "2s");
+      }
+      return 'low-health';
+    }
+    return '';
+  }
+
   changeBasicInfo() {
-    console.log("Trying to change basic info")
     this.basicEdit = !this.basicEdit;
   }
 
   changeStats() {
-    console.log("Trying to change stats")
     this.statsEdit = !this.statsEdit;
   }
 
   changeBattleStats() {
-    console.log("Trying to change battle stats")
     this.battleEdit = !this.battleEdit;
   }
 
   changeOtherInfo() {
-    console.log("Trying to change other info")
     this.otherEdit = !this.otherEdit;
   }
 }

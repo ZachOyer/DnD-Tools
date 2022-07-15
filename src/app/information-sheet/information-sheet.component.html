@@ -2,7 +2,7 @@
   <!-- This is for MOBILE -->
   <div class="d-block d-sm-block d-md-none">
     <div class="row">
-      <div class="col-5">
+      <div class="col-6">
         <div class="form-group select-character">
           <label for="select-character" class="form-label mb-0 mt-2"> Select Character <fa-icon [icon]="faSelectChar"></fa-icon></label>
           <select #char1 (change)="setCurrentCharacter(char1.value)" class="form-select" id="select-character">
@@ -11,9 +11,9 @@
           </select>
         </div>
       </div>
-      <div class="col-5">
+      <div class="col-6">
         <label>&nbsp;</label>
-        <div class="btn btn-outline-primary create-character">button</div>
+        <div class="create-character" routerLinkActive="active" routerLink="/character-creation">Add a character</div>
       </div>
       <div class="col-12 col-md-6">
         <h1 class="title-text">Character Info</h1>
@@ -37,7 +37,7 @@
       </div>
       <div class="col-3">
         <label>&nbsp;</label>
-        <div class="create-character">Create a character</div>
+        <div class="create-character" routerLinkActive="active" routerLink="/character-creation">Add a character</div>
       </div>
     </div>
   </div>
@@ -55,7 +55,10 @@
           Character Name
         </div>
         <div class="col curtains">
-          Class & Level
+          Level
+        </div>
+        <div class="col curtains">
+          Class
         </div>
         <div class="col curtains">
           Race
@@ -72,10 +75,13 @@
       </div>
       <div *ngIf="characters" class="row" style="margin-top: 5px">
         <div class="col text-info">
-          <input> {{characters[currentCharacterIndex]?.name}}
+          {{characters[currentCharacterIndex]?.name}}
         </div>
         <div class="col text-info">
-          lvl {{characters[currentCharacterIndex]?.level}} - {{characters[currentCharacterIndex]?.class}}
+          {{characters[currentCharacterIndex]?.level}}
+        </div>
+        <div class="col text-info">
+          {{characters[currentCharacterIndex]?.class}}
         </div>
         <div class="col text-info">
           {{characters[currentCharacterIndex]?.race}}
@@ -182,11 +188,25 @@
               {{characters[currentCharacterIndex]?.speed}}
             </div>
           </div>
-          <div class="health-ball">
-            <h5 style="font-family: 'Oswald', sans-serif">Current Hit Points</h5>
-            <h4 *ngIf="characters" class="text-info mb-0">{{characters[currentCharacterIndex]?.hitPoints}}</h4>
-            <h5 class="mx-auto" style="width: max-content; border-top: 2px solid white; padding-top: 8px; font-family: 'Oswald', sans-serif">Maximum Hit Points</h5>
-            <h4 *ngIf="characters" class="text-info">{{characters[currentCharacterIndex]?.maxHitPoints}}</h4>
+          <div class="row">
+            <div class="col">
+              <button class="btn btn-outline-success health-button mt-4" (click)="changeHealth(5)">+5</button>
+              <br>
+              <button class="btn btn-outline-success health-button mt-5" (click)="changeHealth(1)">+1</button>
+            </div>
+            <div class="col">
+              <div *ngIf="characters" class="health-ball" [ngClass]="calcHealth()">
+                <h5 style="font-family: 'Oswald', sans-serif">Current Hit Points</h5>
+                <h4 class="text-info mb-0">{{characters[currentCharacterIndex]?.hitPoints}}</h4>
+                <h5 class="mx-auto" style="width: max-content; border-top: 2px solid white; padding-top: 8px; font-family: 'Oswald', sans-serif">Maximum Hit Points</h5>
+                <h4 class="text-info">{{characters[currentCharacterIndex]?.maxHitPoints}}</h4>
+              </div>
+            </div>
+            <div class="col">
+              <button class="btn btn-outline-danger health-button mt-4" (click)="changeHealth(-5)">-5</button>
+              <br>
+              <button class="btn btn-outline-danger health-button mt-5" (click)="changeHealth(-1)">-1</button>
+            </div>
           </div>
         </div>
       </div>

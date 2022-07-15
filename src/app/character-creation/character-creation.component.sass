@@ -1,0 +1,77 @@
+@import ../information-sheet/information-sheet.component
+
+.middle
+  margin-top: 20vh
+  margin-bottom: 10vh
+
+.fancy-font
+  font-family: 'Montserrat', sans-serif
+
+.predef
+  transition: color 0.5s ease-in-out
+  color: #1ed1bc
+  font-size: 20px
+
+.btn-outline-secondary
+  width: 210px
+  font-family: 'Oswald', sans-serif
+  font-size: 20px
+  transition: all 0.5s ease-in-out
+  &:hover
+    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px
+
+
+.btn-outline-primary
+  width: 210px
+  font-family: 'Oswald', sans-serif
+  font-size: 20px
+  transition: all 0.5s ease-in-out
+  &:hover
+    box-shadow: rgba(111, 66, 193, 0.4) -5px 5px, rgba(111, 66, 193, 0.3) -10px 10px, rgba(111, 66, 193, 0.2) -15px 15px, rgba(111, 66, 193, 0.1) -20px 20px, rgba(111, 66, 193, 0.05) -25px 25px
+
+.title-text
+  font-family: 'Roboto Slab', serif
+  text-align: center
+  border-bottom: 2px solid
+  width: max-content
+  margin-right: auto
+  margin-left: auto
+  margin-top: 15px
+
+.magic-ball
+  width: 300px
+  height: 300px
+  border-radius: 50%
+  transition: all 1s ease-in-out
+  box-shadow: inset 0 0 50px #0d1d49, inset 20px 0 80px #f0f, inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff, 0 0 30px #0d1d49, -10px 0 60px #f0f, 10px 0 60px #0ff
+  &:hover
+    transform: translateY(-4px)
+    box-shadow: inset 0 0 30px #0d1d49, inset 20px 0 60px #f0f, inset -20px 0 60px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff, 0 0 50px #0d1d49, -10px 0 80px #f0f, 10px 0 80px #0ff
+
+.magic-ball:hover .predef
+  color: #90fff2
+
+#clouds
+  overflow: hidden
+  position: absolute
+  transform: scale(1.5) translate(-10%, -40%)
+  opacity: 0.1
+  z-index: -99
+
+.background-curtains
+  opacity: 0.5
+  z-index: -100
+  position: fixed
+  height: 100%
+  width: 100%
+  transform: translateY(-5px)
+
+.background-curtains2
+  opacity: 0.5
+  z-index: -99
+  position: fixed
+  height: 100%
+  width: 100%
+  transform: translateY(-5px)
+
+

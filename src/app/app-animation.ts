@@ -4,12 +4,11 @@ import {
   query,
   style,
   animate,
-  group,
-  animateChild
+  group
 } from '@angular/animations';
 export const appAnimations =
   trigger('routeAnimations', [
-    transition('* => Info', [
+    transition('Dice => Info', [
       query(':enter, :leave',
         style({ position: 'fixed',  width: '100%' }),
         { optional: true }),
@@ -26,7 +25,58 @@ export const appAnimations =
           ], { optional: true }),
       ])
     ]),
-    transition('* => Dice', [
+    transition('CharCreation => Dice', [
+      query(':enter, :leave',
+        style({ position: 'fixed',  width: '100%' }),
+        { optional: true }),
+      group([
+        query(':enter', [
+          style({ opacity: 0 }),
+          animate('0.8s ease-in-out',
+          style({ opacity: 1 }))
+        ], { optional: true }),
+        query(':leave', [
+          style({ opacity: 1 }),
+          animate('0.8s ease-in-out',
+          style({ opacity: 0 }))
+          ], { optional: true }),
+      ])
+    ]),
+    transition('Info => CharCreation', [
+      query(':enter, :leave',
+        style({ position: 'fixed',  width: '100%' }),
+        { optional: true }),
+      group([
+        query(':enter', [
+          style({ opacity: 0 }),
+          animate('1.5s ease-in-out',
+          style({ opacity: 1 }))
+        ], { optional: true }),
+        query(':leave', [
+          style({ opacity: 1, transform: 'translateY(0%)' }),
+          animate('0.8s ease-in-out',
+          style({ opacity: 0, transform: 'translateY(20%)' }))
+          ], { optional: true }),
+      ])
+    ]),
+    transition('CharCreation => Info', [
+      query(':enter, :leave',
+        style({ position: 'fixed',  width: '100%' }),
+        { optional: true }),
+      group([
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateY(20%)' }),
+          animate('0.8s ease-in-out',
+          style({ opacity: 1, transform: 'translateY(0%)' }))
+        ], { optional: true }),
+        query(':leave', [
+          style({ opacity: 1 }),
+          animate('0.8s ease-in-out',
+          style({ opacity: 0 }))
+          ], { optional: true }),
+      ])
+    ]),
+    transition('Info => Dice', [
       query(':enter, :leave',
         style({ position: 'fixed', width: '100%' }),
         { optional: true }),
