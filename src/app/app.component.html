@@ -32,7 +32,7 @@
       </div>
     </nav>
   </div>
-  <div [@routeAnimations]="o && o.activatedRouteData && o.activatedRouteData['animation']" style="height: 92vh; padding-top: 5px;">
+  <div [@routeAnimations]="o && o.activatedRouteData && o.activatedRouteData['animation']" style="min-height: 92vh; padding-top: 5px;">
     <router-outlet #o="outlet"></router-outlet>
   </div>
 </ng-container>

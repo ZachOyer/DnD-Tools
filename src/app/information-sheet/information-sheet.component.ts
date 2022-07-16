@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faArrowsDownToPeople, faArrowUpWideShort, faBolt, faBrain, faCircleCheck, faFilePen, faFloppyDisk, faHandFist, faHatWizard, faHeart, faHeartPulse, faMasksTheater, faPencil, faPencilAlt, faPencilSquare, faPersonHiking, faPersonRunning, faScroll, faShield, faShieldHalved } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsDownToPeople, faArrowUpWideShort, faBolt, faBrain, faCircleArrowUp, faCircleCheck, faFilePen, faHandFist, faHeart, faMasksTheater, faPersonHiking, faPersonRunning, faScroll, faShield } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faCircleDot } from '@fortawesome/free-regular-svg-icons';
 import { HttpClient } from '@angular/common/http';
 import { CharacterService } from '../character/character.service';
 
@@ -24,6 +25,9 @@ export class InformationSheetComponent implements OnInit {
   faInitiative = faBolt;
   faHealth = faHeart;
   faSelectChar = faArrowsDownToPeople;
+  faSuperProf = faCircleArrowUp;
+  faYesProf = faCircleDot;
+  faNoProf = faCircle;
 
   basicEdit = false;
   statsEdit = false;

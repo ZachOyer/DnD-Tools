@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { faArrowUp, faArrowUp91, faDiceD20, faDragon, faDungeon } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp91, faDragon, faDungeon } from '@fortawesome/free-solid-svg-icons';
 import { __values } from 'tslib';
 
 @Component({

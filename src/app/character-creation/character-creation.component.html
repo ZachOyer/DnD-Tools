@@ -8,8 +8,8 @@
     </svg> -->
   </div>
   <div class="row middle">
-    <div class="magic-ball mx-auto">
-      <div class="text-center fancy-font predef" style="margin-top: 25px">
+    <div (click)="goToNewChar()" class="magic-ball mx-auto" [ngClass]="{'test': testing}">
+      <div class="text-center fancy-font new" style="margin-top: 25px">
         Create
         <br>
         <fa-icon style="font-size: 6em" [icon]="faNewChar"></fa-icon>
@@ -21,12 +21,12 @@
   <div class="row mt-5">
     <div class="col" style="justify-content: end">
       <div class="mx-auto text-center">
-        <button class="btn btn-outline-primary left">Predefined Character <fa-icon [icon]="faPredef"></fa-icon></button>
+        <button class="btn btn-outline-primary">Predefined Character <fa-icon [icon]="faPredef"></fa-icon></button>
       </div>
     </div>
     <div class="col">
       <div class="mx-auto text-center" routerLinkActive="active" routerLink="/info-sheet">
-        <button class="btn btn-outline-secondary right">Back <fa-icon [icon]="faBack"></fa-icon></button>
+        <button class="btn btn-outline-secondary">Back <fa-icon [icon]="faBack"></fa-icon></button>
       </div>
     </div>
   </div>

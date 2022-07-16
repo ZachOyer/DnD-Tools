@@ -27,7 +27,7 @@
         <div class="form-group select-character">
           <label for="select-character" class="form-label mb-0 mt-2"> Select Character <fa-icon [icon]="faSelectChar"></fa-icon></label>
           <select #char2 (change)="setCurrentCharacter(char2.value)" class="form-select" id="select-character">
-            <option>-- Characters --</option>
+            <option value={{currentCharacterIndex}}>-- Characters --</option>
             <option *ngFor="let character of characters" value={{character.id}}>{{character.name}}</option>
           </select>
         </div>
@@ -120,33 +120,33 @@
             <tbody *ngIf="characters">
               <tr>
                 <th scope="row"><fa-icon [icon]="faStr"></fa-icon> Str</th>
-                <td class="text-info">{{characters[currentCharacterIndex]?.strength}}</td>
-                <td class="text-info">{{getMod(characters[currentCharacterIndex]?.strength)}}</td>
+                <td class="text-info">{{characters[currentCharacterIndex].strength}}</td>
+                <td class="text-info">{{getMod(characters[currentCharacterIndex].strength)}}</td>
               </tr>
               <tr class="table-dark">
                 <th scope="row"><fa-icon [icon]="faDex"></fa-icon> Dex</th>
-                <td class="text-info">{{characters[currentCharacterIndex]?.dexterity}}</td>
-                <td class="text-info">{{getMod(characters[currentCharacterIndex]?.dexterity)}}</td>
+                <td class="text-info">{{characters[currentCharacterIndex].dexterity}}</td>
+                <td class="text-info">{{getMod(characters[currentCharacterIndex].dexterity)}}</td>
               </tr>
               <tr>
                 <th scope="row"><fa-icon [icon]="faCon"></fa-icon> Con</th>
-                <td class="text-info">{{characters[currentCharacterIndex]?.constitution}}</td>
-                <td class="text-info">{{getMod(characters[currentCharacterIndex]?.constitution)}}</td>
+                <td class="text-info">{{characters[currentCharacterIndex].constitution}}</td>
+                <td class="text-info">{{getMod(characters[currentCharacterIndex].constitution)}}</td>
               </tr>
               <tr class="table-dark">
                 <th scope="row"><fa-icon [icon]="faInt"></fa-icon> Int</th>
-                <td class="text-info">{{characters[currentCharacterIndex]?.intelligence}}</td>
-                <td class="text-info">{{getMod(characters[currentCharacterIndex]?.intelligence)}}</td>
+                <td class="text-info">{{characters[currentCharacterIndex].intelligence}}</td>
+                <td class="text-info">{{getMod(characters[currentCharacterIndex].intelligence)}}</td>
               </tr>
               <tr>
                 <th scope="row"><fa-icon [icon]="faWis"></fa-icon> Wis</th>
-                <td class="text-info">{{characters[currentCharacterIndex]?.wisdom}}</td>
-                <td class="text-info">{{getMod(characters[currentCharacterIndex]?.wisdom)}}</td>
+                <td class="text-info">{{characters[currentCharacterIndex].wisdom}}</td>
+                <td class="text-info">{{getMod(characters[currentCharacterIndex].wisdom)}}</td>
               </tr>
               <tr class="table-dark">
                 <th scope="row"><fa-icon [icon]="faCha"></fa-icon> Cha</th>
-                <td class="text-info">{{characters[currentCharacterIndex]?.charisma}}</td>
-                <td class="text-info">{{getMod(characters[currentCharacterIndex]?.charisma)}}</td>
+                <td class="text-info">{{characters[currentCharacterIndex].charisma}}</td>
+                <td class="text-info">{{getMod(characters[currentCharacterIndex].charisma)}}</td>
               </tr>
             </tbody>
           </table>
@@ -214,14 +214,130 @@
   </div>
 
 
-  <div class="row">
-    <div class="row" style="height: 50%;">
-      <div class="section">
-        <div (click)="changeOtherInfo()" id="section-bar">
-          <fa-icon *ngIf="!otherEdit" class="edit-button" [icon]="faEdit"></fa-icon>
-          <fa-icon *ngIf="otherEdit" class="edit-button" [icon]="faSave"></fa-icon>
-          <h3>Other Info</h3>
+  <div class="row" style="height: max-content;">
+    <div class="section">
+      <div (click)="changeOtherInfo()" id="section-bar">
+        <fa-icon *ngIf="!otherEdit" class="edit-button" [icon]="faEdit"></fa-icon>
+        <fa-icon *ngIf="otherEdit" class="edit-button" [icon]="faSave"></fa-icon>
+        <h3>Other Info</h3>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h6>Skills</h6>
+          <div class="row section">
+            <div class="curtains">Proficiency Bonus: {{characters[currentCharacterIndex]?.proficiencyBonus}}</div>
+            <table class="table" style="vertical-align: middle" *ngIf="characters[currentCharacterIndex]?.proficiencies">
+              <tbody>
+                <tr>
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.acrobatics === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.acrobatics === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.acrobatics === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Acrobatics</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.acrobatics * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].dexterity)}}</td>
+                </tr>
+                <tr class="table-dark">
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.animalHandling === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.animalHandling === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.animalHandling === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Animal Handling</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.animalHandling * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].wisdom)}}</td>
+                </tr>
+                <tr>
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.arcana === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.arcana === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.arcana === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Arcana</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.arcana * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].intelligence)}}</td>
+                </tr>
+                <tr class="table-dark">
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.athletics === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.athletics === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.athletics === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Athletics</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.athletics * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].strength)}}</td>
+                </tr>
+                <tr>
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.deception === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.deception === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.deception === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Deception</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.deception * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].charisma)}}</td>
+                </tr>
+                <tr class="table-dark">
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.history === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.history === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.history === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>History</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.history * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].intelligence)}}</td>
+                </tr>
+                <tr>
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.insight === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.insight === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.insight === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Insight</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.insight * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].wisdom)}}</td>
+                </tr>
+                <tr class="table-dark">
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.intimidation === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.intimidation === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.intimidation === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Intimidation</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.intimidation * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].charisma)}}</td>
+                </tr>
+                <tr>
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.investigation === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.investigation === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.investigation === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Investigation</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.investigation * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].intelligence)}}</td>
+                </tr>
+                <tr class="table-dark">
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.medicine === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.medicine === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.medicine === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Medicine</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.medicine * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].wisdom)}}</td>
+                </tr>
+                <tr>
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.nature === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.nature === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.nature === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Nature</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.nature * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].intelligence)}}</td>
+                </tr>
+                <tr class="table-dark">
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.perception === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.perception === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.perception === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Perception</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.perception * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].wisdom)}}</td>
+                </tr>
+                <tr>
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.performance === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.performance === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.performance === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Performance</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.performance * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].charisma)}}</td>
+                </tr>
+                <tr class="table-dark">
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.persuasion === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.persuasion === 1" [icon]="faYesProf"></fa-icon><fa-icon class="fa-regular" *ngIf="characters[currentCharacterIndex]?.proficiencies.persuasion === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Persuasion</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.persuasion * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].charisma)}}</td>
+                </tr>
+                <tr>
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.religion === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.religion === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.religion === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Religion</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.religion * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].intelligence)}}</td>
+                </tr>
+                <tr class="table-dark">
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.sleightOfHand === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.sleightOfHand === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.sleightOfHand === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Sleight Of Hand</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.sleightOfHand * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].dexterity)}}</td>
+                </tr>
+                <tr>
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.stealth === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.stealth === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.stealth === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Stealth</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.stealth * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].dexterity)}}</td>
+                </tr>
+                <tr class="table-dark">
+                  <td><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.survival === 2" [icon]="faSuperProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.survival === 1" [icon]="faYesProf"></fa-icon><fa-icon *ngIf="characters[currentCharacterIndex]?.proficiencies.survival === 0" [icon]="faNoProf"></fa-icon></td>
+                  <th>Survival</th>
+                  <td>{{(characters[currentCharacterIndex]?.proficiencies.survival * characters[currentCharacterIndex]?.proficiencyBonus) + getMod(characters[currentCharacterIndex].wisdom)}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
+        <div class="col">
+          <h6>Attacks</h6>
+        </div>
+        <div class="col">
+          <h6>Equipment</h6>
+        </div>
+        <div class="col">
+          <h6>Features and Traits</h6>
+          Languages
+          <br>
+          Extra basic info
+          <br>
+          World info
+        </div>
+      </div>
+      <div class="row">
       </div>
     </div>
   </div>

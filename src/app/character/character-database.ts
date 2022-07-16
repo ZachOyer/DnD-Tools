@@ -21,7 +21,27 @@ export class InMemCharService implements InMemoryDbService {
       hitPoints: 37,
       armorClass: 13,
       initiative: 0,
-      speed: 30
+      speed: 30,
+      proficiencies: {
+        acrobatics: 0,
+        animalHandling: 0,
+        arcana: 0,
+        athletics: 1,
+        deception: 0,
+        history: 0,
+        insight: 1,
+        intimidation: 1,
+        investigation: 0,
+        medicine: 2,
+        nature: 0,
+        perception: 2,
+        performance: 0,
+        persuasion: 1,
+        religion: 0,
+        sleightOfHand: 0,
+        stealth: 0,
+        survival: 0,
+      }
     },
     {
       id: 1,
@@ -64,7 +84,27 @@ export class InMemCharService implements InMemoryDbService {
       hitPoints: 45,
       armorClass: 16,
       initiative: 10,
-      speed: 30
+      speed: 30,
+      proficiencies: {
+        acrobatics: 0,
+        animalHandling: 0,
+        arcana: 1,
+        athletics: 1,
+        deception: 0,
+        history: 0,
+        insight: 1,
+        intimidation: 1,
+        investigation: 0,
+        medicine: 0,
+        nature: 0,
+        perception: 1,
+        performance: 0,
+        persuasion: 0,
+        religion: 0,
+        sleightOfHand: 0,
+        stealth: 1,
+        survival: 0,
+      }
     }
     ];
     return {characters};
