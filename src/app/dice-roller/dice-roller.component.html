@@ -4,30 +4,42 @@
   <div class="title-container">
     <h1 class="title-text">Dice Roller</h1>
   </div>
-  <div class="dice-icons">
-  </div>
   <div class="hit">
     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-      <input (click)="setDiceSize(4)" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+      <input [checked]="diceSize === 4" (click)="setDiceSize(4)" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
       <label class="btn btn-outline-primary" for="btnradio1">d4</label>
-      <input (click)="setDiceSize(6)" type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+      <input [checked]="diceSize === 6" (click)="setDiceSize(6)" type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
       <label class="btn btn-outline-primary" for="btnradio2">d6</label>
-      <input (click)="setDiceSize(8)" type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+      <input [checked]="diceSize === 8" (click)="setDiceSize(8)" type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
       <label class="btn btn-outline-primary" for="btnradio3">d8</label>
-      <input (click)="setDiceSize(10)" type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+      <input [checked]="diceSize === 10" (click)="setDiceSize(10)" type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
       <label class="btn btn-outline-primary" for="btnradio4">d10</label>
-      <input (click)="setDiceSize(12)" type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
+      <input [checked]="diceSize === 12" (click)="setDiceSize(12)" type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
       <label class="btn btn-outline-primary" for="btnradio5">d12</label>
-      <input (click)="setDiceSize(20)" type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off" checked>
+      <input [checked]="diceSize === 20" (click)="setDiceSize(20)" type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off">
       <label class="btn btn-outline-primary" for="btnradio6">d20</label>
-      <input (click)="setDiceSize(100)" type="radio" class="btn-check" name="btnradio" id="btnradio7" autocomplete="off">
+      <input [checked]="diceSize === 100" (click)="setDiceSize(100)" type="radio" class="btn-check" name="btnradio" id="btnradio7" autocomplete="off">
       <label class="btn btn-outline-primary" for="btnradio7">d100</label>
     </div>
     <br>
+    <div>
+      <label for="numRolls" style="font-family: 'Montserrat', sans-serif">Number of dice</label>
+      <br>
+      <span class="input-group-text d-inline" style="width: max-content; padding-bottom: 9px; padding-top: 9px"><fa-icon [icon]="faRolls"></fa-icon></span>
+      <select #numRoll (change)="setRolls(numRoll.value)" id="numRoll" class="form-select d-inline" style="width: 100px">
+        <option [selected]="numRolls === 1">1</option>
+        <option [selected]="numRolls === 2">2</option>
+        <option [selected]="numRolls === 3">3</option>
+        <option [selected]="numRolls === 4">4</option>
+        <option [selected]="numRolls === 5">5</option>
+        <option [selected]="numRolls === 6">6</option>
+      </select>
+    </div>
+    <br>
     <div class="block">
-      <button id="advantage" (click)="rollAdvantage()" class="btn btn-outline-success btn-sm" style="width: 120px; font-weight: bold;">Advantage</button>
+      <button [disabled]="numRolls !== 1" id="advantage" (click)="rollAdvantage()" class="btn btn-outline-success btn-sm" style="width: 120px; font-weight: bold;">Advantage</button>
       <button id="regular-roll" (click)="rollDice()" class="btn btn-info btn-lg mx-2" style="font-weight:bold">Roll dice</button>
-      <button id="disadvantage" (click)="rollDisadvantage()" class="btn btn-outline-danger btn-sm" style="width: 120px">Disadvantage</button>
+      <button [disabled]="numRolls !== 1" id="disadvantage" (click)="rollDisadvantage()" class="btn btn-outline-danger btn-sm" style="width: 120px">Disadvantage</button>
     </div>
     <br>
 
@@ -37,13 +49,13 @@
       <input id="modifier-input" type="number" class="form-control" [(ngModel)]="modifier">
     </div>
   </div>
-  <div class="container">
+  <div class="display-box">
     <div *ngIf="!(diceValue === -100)" style="display: inline;">
       <div [ngClass]="[rollType]" [@flyInOut] class="card mx-auto" style="max-width: 20rem; text-align: center;">
         <div class="card-body">
           You rolled:
-          <h4 class="card-title" style="font-size: 50px;">{{diceValue}}</h4>
-          <p class="card-text" style="font-style:italic">{{description}}</p>
+          <h4 class="card-title" style="font-family: 'Ibarra Real Nova', serif; font-size: 50px;">{{diceValue}}</h4>
+          <p class="card-text" style="font-family: 'Ibarra Real Nova', serif"><span style="color:deepskyblue">{{description}}</span> + <span style="color: greenyellow">{{modifier}}</span> = {{diceValue}}</p>
         </div>
       </div>
       <div [@flyInOut] *ngIf="criticalHit" class="badge bg-warning">Critical hit!</div>

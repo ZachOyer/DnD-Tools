@@ -13,8 +13,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EditBasicInfoModalComponent } from './edit-info-modals/edit-basic-info-modal/edit-basic-info-modal.component';
 import { EditStatsModalComponent } from './edit-info-modals/edit-stats-modal/edit-stats-modal.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemCharService } from 'src/app/character/character-database';
 import { CharacterService } from './character/character.service';
 import { CharacterCreationComponent } from './character-creation/character-creation.component';
 import { NewCharacterComponent } from './character-creation/new-character/new-character.component';
@@ -37,7 +35,6 @@ import { NewCharacterComponent } from './character-creation/new-character/new-ch
     RouterModule,
     FontAwesomeModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemCharService)
   ],
   providers: [CharacterService],
   bootstrap: [AppComponent]

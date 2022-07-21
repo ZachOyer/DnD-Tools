@@ -43,7 +43,7 @@
   height: 150px
   border-radius: 20%
   transition: box-shadow 0.5s
-  box-shadow: 0 0 50px #80f, -10px 0 40px #ff0000, 10px 0 40px #0ff
+  box-shadow: 0 0 50px #80f, 10px 0 40px #ff0000, -10px 0 40px #0ff
 
 .health-button
   width: 70px
@@ -60,15 +60,15 @@
   -webkit-animation-iteration-count: infinite
 
 
-// /* Chrome, Safari, Edge, Opera */
-// input::-webkit-outer-spin-button,
-// input::-webkit-inner-spin-button
-//   -webkit-appearance: none
-//   margin: 0
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+  -webkit-appearance: none
+  margin: 0
 
-// /* Firefox */
-// input[type=number]
-//   -moz-appearance: textfield
+/* Firefox */
+input[type=number]
+  -moz-appearance: textfield
 
 h3
   font-family: 'Montserrat', sans-serif
@@ -111,6 +111,60 @@ h6
   right: 20px
   top: 7px
 
+.scrollable
+  overflow-y: scroll
+  overflow-x: hidden
+
+.attacks .card
+  font-family: 'Ibarra Real Nova', serif
+
+.attacks .card-header
+  font-size: 18px
+  border-bottom: 2px solid #3b1769
+
+.attacks .card-text
+  font-size: 13px
+
+.attack-name
+  font-family: 'Kanit', sans-serif
+
+.convert-button
+  width: 40%
+  border-radius: 10px 0px 0px 10px
+
+.toggle-electrum
+  width: 60%
+  border-radius: 0px 10px 10px 0px
+
+.currency-title
+  border-radius: 50% 50% 0% 0%
+  border: 2px solid #30115e
+  border-bottom: 0px
+  width: 95%
+  font-family: 'Ibarra Real Nova', serif
+
+.convert
+  cursor: pointer
+  transform: all 0.2s ease-in-out
+  &:hover
+    color: royalblue
+    transform: scale(1.2)
+
+/* width */
+::-webkit-scrollbar
+  width: 5px
+
+/* Track */
+::-webkit-scrollbar-track
+  background: #270c4e
+
+/* Handle */
+::-webkit-scrollbar-thumb
+  background: #500baf
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover
+  background: #460c97
 
 
 @-webkit-keyframes bounce
@@ -149,16 +203,50 @@ h6
     -ms-transform: translateY(-7px)
     transform: translateY(-7px)
 
+@-webkit-keyframes shake
+  0%,
+  100%,
+  80%
+    -webkit-transform: rotate(0deg)
+    -ms-transform: rotate(0deg)
+    transform: rotate(0deg)
+  10%,
+  50%
+    -webkit-transform: rotate(-10deg)
+    -ms-transform: rotate(-10deg)
+    transform: rotate(-10deg)
+  30%
+    -webkit-transform: rotate(10deg)
+    -ms-transform: rotate(10deg)
+    transform: rotate(10deg)
+
+@keyframes shake
+  0%,
+  100%,
+  80%
+    -webkit-transform: rotate(0deg)
+    -ms-transform: rotate(0deg)
+    transform: rotate(0deg)
+  10%,
+  50%
+    -webkit-transform: rotate(-10deg)
+    -ms-transform: rotate(-10deg)
+    transform: rotate(-10deg)
+  30%
+    -webkit-transform: rotate(10deg)
+    -ms-transform: rotate(10deg)
+    transform: rotate(10deg)
+
 @-webkit-keyframes flash
   0%,
   100%,
   30%,
   60%,
   90%
-    box-shadow: 0 0 50px #80f, -10px 0 40px #ff0000, 10px 0 40px #0ff
+    box-shadow: 0 0 50px #80f, 10px 0 40px #ff0000, -10px 0 40px #0ff
   40%,
   70%
-    box-shadow: 0 0 50px #b0f, -10px 0 40px #ff0000, 10px 0 40px #3ff
+    box-shadow: 0 0 50px #b0f, 10px 0 40px #ff0000, -10px 0 40px #3ff
 
 @keyframes flash
   0%,
@@ -166,9 +254,9 @@ h6
   30%,
   60%,
   90%
-    box-shadow: 0 0 50px #80f, -10px 0 40px #ff0000, 10px 0 40px #0ff
+    box-shadow: 0 0 50px #80f, 10px 0 40px #ff0000, -10px 0 40px #0ff
   40%,
   70%
-    box-shadow: 0 0 50px #b0f, -10px 0 40px #ff0000, 10px 0 40px #3ff
+    box-shadow: 0 0 50px #b0f, 10px 0 40px #ff0000, -10px 0 40px #3ff
 
 
