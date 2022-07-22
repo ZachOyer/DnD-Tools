@@ -1,5 +1,4 @@
-
-<div class="container" style="overflow-y: hidden">
+<div class="container">
   <!-- This is for MOBILE -->
   <div class="d-block d-sm-block d-md-none">
     <div class="row">
@@ -347,8 +346,7 @@
               </div>
             </div>
           </div>
-          <div [@scaleOut] *ngIf="showAtkAlert && (!characters[currentCharacterIndex].attacks || characters[currentCharacterIndex].attacks.length === 0)" class="alert alert-dismissible alert-warning">
-            <button type="button" class="btn-close" (click)="showAtkAlert = false"></button>
+          <div *ngIf="showAtkAlert && (!characters[currentCharacterIndex].attacks || characters[currentCharacterIndex].attacks.length === 0)" class="alert alert-warning">
             <fa-icon [icon]="faWand" style="color:cornflowerblue; font-size: 30px;"></fa-icon><br>
             <div>You have no attacks!</div>
             <a href="#" class="alert-link">Add a weapon</a>
@@ -357,9 +355,8 @@
 
 
         <div class="col">
-          <h6>Equipment</h6>
-          <div [@scaleOut] *ngIf="showMoneyAlert && !characters[currentCharacterIndex].currency" class="alert alert-dismissible alert-primary">
-            <button type="button" class="btn-close" (click)="showMoneyAlert = false"></button>
+          <h6>Currency</h6>
+          <div *ngIf="showMoneyAlert && !characters[currentCharacterIndex].currency" class="alert alert-primary">
             <fa-icon class="mt-3 mb-2" style="font-size: 30px; color: gold" [icon]="faPoor"></fa-icon><br>
             <div>You have no money!</div>
             <a href="#" class="alert-link">Set up currency</a>
@@ -410,19 +407,31 @@
               <button (click)="toggleElectrum()" class="btn btn-sm btn-outline-primary toggle-electrum">Toggle Electrum</button>
             </div>
           </div>
-          <div class="row">
-            <textarea [(ngModel)]="characters[currentCharacterIndex].equipment" class="form-control" style="border-radius: 10px 10px 0px 10px;"></textarea>
+          <div>
+            <h6>Equipment</h6>
+            <textarea [(ngModel)]="characters[currentCharacterIndex].equipment" class="form-control text-info mx-auto" (ngModelChange)="updateInfo()" placeholder="Travelling light?" rows={{numRows(characters[currentCharacterIndex].equipment)}} style="border-radius: 10px 10px 0px 10px; width: 98%"></textarea>
           </div>
         </div>
         <div class="col">
-          <h6>Features and Traits</h6>
-          Languages
-          <br>
-          Extra basic info
-          <br>
-          World info
+          <div>
+            <h6>Languages</h6>
+            <div>
+              <span *ngFor="let language of characters[currentCharacterIndex].languages" class="badge rounded-pill bg-primary" style="margin-right: 4px; margin-bottom: 8px;">{{language}}</span>
+            </div>
+            <div *ngIf="!characters[currentCharacterIndex].languages" class="alert alert-secondary">
+              <fa-icon class="mt-3 mb-2" style="font-size: 30px; color: indigo" [icon]="faNoSpeak"></fa-icon><br>
+              <div>You can't speak any languages!</div>
+              <a href="#" class="alert-link">Add a language</a>
+            </div>
+          </div>
+          <div>
+            <h6>Features and Traits</h6>
+            <textarea [(ngModel)]="characters[currentCharacterIndex].traits" class="form-control text-info mx-auto" (ngModelChange)="updateInfo()" placeholder="You are capable of depressingly little..." rows={{numRows(characters[currentCharacterIndex].traits)}} style="border-radius: 10px 10px 0px 10px; width: 98%"></textarea>
+          </div>
         </div>
       </div>
+
+
       <div class="row">
       </div>
     </div>

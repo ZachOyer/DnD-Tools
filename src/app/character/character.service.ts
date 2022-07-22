@@ -50,7 +50,7 @@ export class CharacterService {
     },
     attacks: [
       {
-        name: "Greataxe",
+        name: "Great Axe",
         range: 5,
         atkBonus: 6,
         rolls: 1,
@@ -59,7 +59,7 @@ export class CharacterService {
         type: "Slashing"
       },
       {
-        name: "Handaxe",
+        name: "Hand Axe",
         range: 50,
         atkBonus: 6,
         rolls: 1,
@@ -111,7 +111,14 @@ export class CharacterService {
       gold: 88,
       platinum: 0
     },
-    equipment: "",
+    equipment: "Great Axe\n2 Hand Axes\nExplorers Pack\n4 Javelins\nFine Clothes",
+    languages: [
+      "Common",
+      "Elvish",
+      "Undercommon",
+      "Celestial",
+      "Dwarvish",
+    ]
   },
   {
     id: 1,
@@ -203,6 +210,11 @@ export class CharacterService {
       platinum: 2
     },
     equipment: "",
+    languages: [
+      "Common",
+      "Elvish"
+    ],
+    traits: "Fey Ancestry\nDark Vision",
   }
   ];
 

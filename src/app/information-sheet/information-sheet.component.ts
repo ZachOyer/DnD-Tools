@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faArrowsDownToPeople, faArrowUpWideShort, faBolt, faBrain, faCircleArrowUp, faCircleCheck, faCircleLeft, faCoins, faDice, faFilePen, faHandFist, faHeart, faMasksTheater, faPersonHiking, faPersonRunning, faRotate, faSackXmark, faScroll, faShield, faSlash, faWandMagic, faWandMagicSparkles, faWandSparkles } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsDownToPeople, faArrowUpWideShort, faBolt, faBrain, faCircleArrowUp, faCircleCheck, faCircleLeft, faCoins, faCommentSlash, faDice, faFilePen, faHandFist, faHeart, faMasksTheater, faPersonHiking, faPersonRunning, faRotate, faSackXmark, faScroll, faShield, faSlash, faWandMagic, faWandMagicSparkles, faWandSparkles } from '@fortawesome/free-solid-svg-icons';
 import { faCircle, faCircleDot, faCircleRight } from '@fortawesome/free-regular-svg-icons';
-import { HttpClient } from '@angular/common/http';
 import { CharacterService } from '../character/character.service';
 import { Router } from '@angular/router';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -15,6 +14,13 @@ import { animate, style, transition, trigger } from '@angular/animations';
       transition('* => void', [
         animate('0.4s ease-in'),
         style({ transform: 'scale(0) translateY(-100%)', opacity: 0})
+      ])
+    ]),
+    trigger('fadeInBottom', [
+      transition('void => *', [
+        style({ transform: 'translateY(100%)', opacity: 0}),
+        animate('0.4s ease-in'),
+        style({ transform: 'translateY(0%)', opacity: 1})
       ])
     ])
   ]
@@ -42,7 +48,8 @@ export class InformationSheetComponent implements OnInit {
   faPoor = faSackXmark;
   faConvertRight = faCircleRight;
   faConvertLeft = faCircleLeft;
-  faWand = faWandSparkles
+  faWand = faWandSparkles;
+  faNoSpeak = faCommentSlash;
 
   basicEdit = false;
   statsEdit = false;
@@ -54,15 +61,14 @@ export class InformationSheetComponent implements OnInit {
   showMoneyAlert = true;
 
   // ------- SET TO TRUE TO RE-ENTER DATA ON LOCAL STORAGE ---------
-  reenterData = true;
+  reenterData = false;
   // ---------------------------------------------------------------
 
   currentCharacterIndex: number;
   characters: any;
 
 
-  constructor(private http: HttpClient,
-              private charService: CharacterService,
+  constructor(private charService: CharacterService,
               private router: Router) {
     this.characters = undefined;
     this.currentCharacterIndex = 0;
@@ -95,6 +101,12 @@ export class InformationSheetComponent implements OnInit {
     } else {
       this.characters[this.currentCharacterIndex].hitPoints += change;
     }
+    this.updateInfo();
+  }
+
+  updateInfo() {
+    console.log("Saving data");
+    this.charService.updateCharacters(this.characters);
   }
 
   toggleElectrum() {
@@ -140,6 +152,7 @@ export class InformationSheetComponent implements OnInit {
       this.characters[this.currentCharacterIndex].currency.platinum += 1;
       this.characters[this.currentCharacterIndex].currency.gold -= 10;
     }
+    this.updateInfo();
   }
 
   convertDown(currency: string) {
@@ -159,6 +172,7 @@ export class InformationSheetComponent implements OnInit {
       this.characters[this.currentCharacterIndex].currency.platinum -= 1;
       this.characters[this.currentCharacterIndex].currency.gold += 10;
     }
+    this.updateInfo();
   }
 
   convertCurrency() {
@@ -175,6 +189,7 @@ export class InformationSheetComponent implements OnInit {
     this.characters[this.currentCharacterIndex].currency.electrum %= 2;
     this.characters[this.currentCharacterIndex].currency.platinum += Math.floor(this.characters[this.currentCharacterIndex].currency.gold / 10);
     this.characters[this.currentCharacterIndex].currency.gold %= 10;
+    this.updateInfo();
   }
 
   changeBasicInfo() {
@@ -189,8 +204,17 @@ export class InformationSheetComponent implements OnInit {
     this.battleEdit = !this.battleEdit;
   }
 
+  numRows(input: string) {
+    if (!input || (input.match(/\n/g) || [])?.length < 5) {
+      return 5;
+    } else if ((input.match(/\n/g) || [])?.length > 23) {
+      return 24;
+    }
+    return (input.match(/\n/g) || []).length + 1;
+  }
+
   changeOtherInfo() {
     this.otherEdit = !this.otherEdit;
-    this.charService.updateCharacters(this.characters);
+    this.updateInfo();
   }
 }
