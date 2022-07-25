@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CharacterService } from './character/character.service';
 import { CharacterCreationComponent } from './character-creation/character-creation.component';
 import { NewCharacterComponent } from './character-creation/new-character/new-character.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import { NewCharacterComponent } from './character-creation/new-character/new-ch
     FontAwesomeModule,
     HttpClientModule,
   ],
-  providers: [CharacterService],
+  providers: [CharacterService,
+              BsModalRef,
+              BsModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,1 +1,37 @@
-<p>edit-basic-info-modal works!</p>
+<div class="container pb-4">
+  <button (click)="closeModal()" class="btn close"><fa-icon [icon]="faClose"></fa-icon></button>
+  <div class="row mb-1">
+    <h1>Edit Basic Info</h1>
+  </div>
+  <div class="row mx-auto">
+    <div class="row mx-auto">
+      <span class="label">Character Name</span><input id="firstInput" type="text" class="form-control text-info">
+    </div>
+    <div class="row mx-auto">
+      <span class="label">Level</span><input type="number" class="form-control text-info">
+    </div>
+    <div class="row mx-auto">
+      <span class="label">Class</span><input type="text" class="form-control text-info">
+    </div>
+    <div class="row mx-auto">
+      <span class="label">Race</span><input type="text" class="form-control text-info">
+    </div>
+    <div class="row mx-auto">
+      <span class="label">Background</span><input type="text" class="form-control text-info">
+    </div>
+    <div class="row mx-auto">
+      <span class="label">Alignment</span><input type="text" class="form-control text-info">
+    </div>
+    <div class="row mx-auto" style="margin-bottom: 25px">
+      <span class="label">XP</span><input type="number" class="form-control text-info">
+    </div>
+    <div class="row mx-auto text-center" style="margin-bottom: 0px">
+      <div class="col">
+        <button (click)="saveInfo()" class="btn btn-success">Save</button>
+      </div>
+      <div class="col">
+        <button (click)="closeModal()" class="btn btn-danger">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

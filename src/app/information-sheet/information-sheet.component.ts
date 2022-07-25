@@ -3,7 +3,9 @@ import { faArrowsDownToPeople, faArrowUpWideShort, faBolt, faBrain, faCircleArro
 import { faCircle, faCircleDot, faCircleRight } from '@fortawesome/free-regular-svg-icons';
 import { CharacterService } from '../character/character.service';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { EditBasicInfoModalComponent } from '../edit-info-modals/edit-basic-info-modal/edit-basic-info-modal.component';
 
 @Component({
   selector: 'app-information-sheet',
@@ -69,7 +71,9 @@ export class InformationSheetComponent implements OnInit {
 
 
   constructor(private charService: CharacterService,
-              private router: Router) {
+              private router: Router,
+              private bsModalService: BsModalService,
+              private bsModalRef: BsModalRef) {
     this.characters = undefined;
     this.currentCharacterIndex = 0;
   }
@@ -192,18 +196,6 @@ export class InformationSheetComponent implements OnInit {
     this.updateInfo();
   }
 
-  changeBasicInfo() {
-    this.basicEdit = !this.basicEdit;
-  }
-
-  changeStats() {
-    this.statsEdit = !this.statsEdit;
-  }
-
-  changeBattleStats() {
-    this.battleEdit = !this.battleEdit;
-  }
-
   numRows(input: string) {
     if (!input || (input.match(/\n/g) || [])?.length < 5) {
       return 5;
@@ -213,8 +205,17 @@ export class InformationSheetComponent implements OnInit {
     return (input.match(/\n/g) || []).length + 1;
   }
 
+  changeBasicInfo() {
+    this.bsModalRef = this.bsModalService.show(EditBasicInfoModalComponent);
+  }
+
+  changeStats() {
+  }
+
+  changeBattleStats() {
+  }
+
   changeOtherInfo() {
-    this.otherEdit = !this.otherEdit;
     this.updateInfo();
   }
 }
