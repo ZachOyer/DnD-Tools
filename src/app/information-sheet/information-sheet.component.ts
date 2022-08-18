@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { faArrowsDownToPeople, faArrowUpWideShort, faBolt, faBrain, faCircleArrowUp, faCircleCheck, faCircleLeft, faCoins, faCommentSlash, faDice, faFilePen, faHandFist, faHeart, faMasksTheater, faPersonHiking, faPersonRunning, faRotate, faSackXmark, faScroll, faShield, faSlash, faWandMagic, faWandMagicSparkles, faWandSparkles } from '@fortawesome/free-solid-svg-icons';
 import { faCircle, faCircleDot, faCircleRight } from '@fortawesome/free-regular-svg-icons';
 import { CharacterService } from '../character/character.service';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { EditBasicInfoModalComponent } from '../edit-info-modals/edit-basic-info-modal/edit-basic-info-modal.component';
+import { EditStatsModalComponent } from '../edit-info-modals/edit-stats-modal/edit-stats-modal.component';
 
 @Component({
   selector: 'app-information-sheet',
@@ -63,7 +64,7 @@ export class InformationSheetComponent implements OnInit {
   showMoneyAlert = true;
 
   // ------- SET TO TRUE TO RE-ENTER DATA ON LOCAL STORAGE ---------
-  reenterData = false;
+  reenterData = true;
   // ---------------------------------------------------------------
 
   currentCharacterIndex: number;
@@ -71,9 +72,9 @@ export class InformationSheetComponent implements OnInit {
 
 
   constructor(private charService: CharacterService,
-              private router: Router,
               private bsModalService: BsModalService,
-              private bsModalRef: BsModalRef) {
+              private bsModalRef: BsModalRef,
+              private ref: ChangeDetectorRef) {
     this.characters = undefined;
     this.currentCharacterIndex = 0;
   }
@@ -207,9 +208,44 @@ export class InformationSheetComponent implements OnInit {
 
   changeBasicInfo() {
     this.bsModalRef = this.bsModalService.show(EditBasicInfoModalComponent);
+    this.bsModalRef.content.newInfo.name = this.characters[this.currentCharacterIndex].name;
+    this.bsModalRef.content.newInfo.level = this.characters[this.currentCharacterIndex].level;
+    this.bsModalRef.content.newInfo.class = this.characters[this.currentCharacterIndex].class;
+    this.bsModalRef.content.newInfo.race = this.characters[this.currentCharacterIndex].race;
+    this.bsModalRef.content.newInfo.background = this.characters[this.currentCharacterIndex].background;
+    this.bsModalRef.content.newInfo.alignment = this.characters[this.currentCharacterIndex]?.alignment;
+    this.bsModalRef.content.newInfo.xp = this.characters[this.currentCharacterIndex]?.xp;
+    this.bsModalRef.content.updateBasicInfo.subscribe((info: any) => {
+      this.characters[this.currentCharacterIndex].name = info?.name
+      this.characters[this.currentCharacterIndex].level = info?.level
+      this.characters[this.currentCharacterIndex].class = info?.class
+      this.characters[this.currentCharacterIndex].race = info?.race
+      this.characters[this.currentCharacterIndex].background = info?.background
+      this.characters[this.currentCharacterIndex].alignment = info?.alignment
+      this.characters[this.currentCharacterIndex].xp = info?.xp
+      this.updateInfo();
+      this.ref.detectChanges();
+    })
   }
 
   changeStats() {
+    this.bsModalRef = this.bsModalService.show(EditStatsModalComponent);
+    this.bsModalRef.content.newStats.strength = this.characters[this.currentCharacterIndex].strength;
+    this.bsModalRef.content.newStats.dexterity = this.characters[this.currentCharacterIndex].dexterity;
+    this.bsModalRef.content.newStats.constitution = this.characters[this.currentCharacterIndex].constitution;
+    this.bsModalRef.content.newStats.intelligence = this.characters[this.currentCharacterIndex].intelligence;
+    this.bsModalRef.content.newStats.wisdom = this.characters[this.currentCharacterIndex].wisdom;
+    this.bsModalRef.content.newStats.charisma = this.characters[this.currentCharacterIndex]?.charisma;
+    this.bsModalRef.content.updateStats.subscribe((info: any) => {
+      this.characters[this.currentCharacterIndex].strength = info?.strength
+      this.characters[this.currentCharacterIndex].dexterity = info?.dexterity
+      this.characters[this.currentCharacterIndex].constitution = info?.constitution
+      this.characters[this.currentCharacterIndex].intelligence = info?.intelligence
+      this.characters[this.currentCharacterIndex].wisdom = info?.wisdom
+      this.characters[this.currentCharacterIndex].charisma = info?.charisma
+      this.updateInfo();
+      this.ref.detectChanges();
+    })
   }
 
   changeBattleStats() {

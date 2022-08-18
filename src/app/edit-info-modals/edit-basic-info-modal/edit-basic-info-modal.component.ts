@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
@@ -10,9 +10,22 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 export class EditBasicInfoModalComponent implements OnInit {
   faClose = faXmark;
 
+  newInfo = {
+    name: '',
+    level: 0,
+    class: '',
+    race: '',
+    background: '',
+    alignment: '',
+    xp: 0,
+  }
+
+  @Output() updateBasicInfo = new EventEmitter();
+
   constructor(private bsModalService: BsModalService,) { }
 
   ngOnInit(): void {
+
   }
 
   ngAfterViewInit(): void {
@@ -24,11 +37,12 @@ export class EditBasicInfoModalComponent implements OnInit {
   }
 
   closeModal() {
-    this.bsModalService.hide()
+    this.bsModalService.hide();
   }
 
   saveInfo() {
-
+    this.updateBasicInfo.emit(this.newInfo);
+    this.bsModalService.hide();
   }
 
 }

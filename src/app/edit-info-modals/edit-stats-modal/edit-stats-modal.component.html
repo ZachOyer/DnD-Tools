@@ -1,3 +1,40 @@
-<div class="container">
-  <h1>Hello world!</h1>
+<div class="container pb-4">
+  <button (click)="closeModal()" class="btn close"><fa-icon [icon]="faClose"></fa-icon></button>
+  <div class="row mb-1">
+    <h1>Edit Basic Info</h1>
+  </div>
+  <div class="row mx-auto">
+    <div class="row mx-auto">
+      <span class="label">Strength</span>
+      <input id="firstInput" type="number" class="form-control text-info" [(ngModel)]="newStats.strength">
+    </div>
+    <div class="row mx-auto">
+      <span class="label">Dexterity</span>
+      <input type="number" class="form-control text-info" [(ngModel)]="newStats.dexterity">
+    </div>
+    <div class="row mx-auto">
+      <span class="label">Constitution</span>
+      <input type="number" class="form-control text-info" [(ngModel)]="newStats.constitution">
+    </div>
+    <div class="row mx-auto">
+      <span class="label">Intelligence</span>
+      <input type="number" class="form-control text-info" [(ngModel)]="newStats.intelligence">
+    </div>
+    <div class="row mx-auto">
+      <span class="label">Wisdom</span>
+      <input type="number" class="form-control text-info" [(ngModel)]="newStats.wisdom">
+    </div>
+    <div class="row mx-auto" style="margin-bottom: 25px">
+      <span class="label">Charisma</span>
+      <input type="number" class="form-control text-info" [(ngModel)]="newStats.charisma">
+    </div>
+    <div class="row mx-auto text-center" style="margin-bottom: 0px">
+      <div class="col">
+        <button (click)="saveInfo()" class="btn btn-success">Save</button>
+      </div>
+      <div class="col">
+        <button (click)="closeModal()" class="btn btn-danger">Cancel</button>
+      </div>
+    </div>
+  </div>
 </div>
