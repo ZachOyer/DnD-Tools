@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { faDiceD20, faLink } from '@fortawesome/free-solid-svg-icons';
 import { appAnimations, introAnimations } from './app-animation';
 
@@ -11,20 +12,13 @@ import { appAnimations, introAnimations } from './app-animation';
 export class AppComponent {
   faDnD = faDiceD20;
   faGit = faLink;
-  currentTab: number;
   isGreen = 'true';
   title = 'DnD Tools';
 
-  constructor() {
-    this.currentTab = 1;
-  }
+  constructor(public router: Router) { }
 
   getState(outlet: any) {
     // Changing the activatedRouteData.state triggers the animation
     return outlet.activatedRouteData.state;
-  }
-
-  setCurrentTab(tab: number) {
-    this.currentTab = tab;
   }
 }

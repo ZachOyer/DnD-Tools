@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { faICursor, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-edit-basic-info-modal',
@@ -9,7 +9,9 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 })
 export class EditBasicInfoModalComponent implements OnInit {
   faClose = faXmark;
+  faCursor = faICursor;
 
+  title = '';
   newInfo = {
     name: '',
     level: 0,
@@ -22,7 +24,7 @@ export class EditBasicInfoModalComponent implements OnInit {
 
   @Output() updateBasicInfo = new EventEmitter();
 
-  constructor(private bsModalService: BsModalService,) { }
+  constructor(private bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
 
@@ -33,16 +35,24 @@ export class EditBasicInfoModalComponent implements OnInit {
     //Add 'implements AfterViewInit' to the class.
     setTimeout(() => {
       document.getElementById('firstInput')?.focus();
+      const titleToSet = 'Edit Basic Info';
+      for (let i = 0; i < titleToSet.length; i++) {
+        setTimeout(() => {
+          this.title = titleToSet.slice(0, i + 1);
+          if (i === (titleToSet.length + 1)) {
+          }
+        }, (i * 100))
+      }
     }, 0)
   }
 
   closeModal() {
-    this.bsModalService.hide();
+    this.bsModalRef.hide();
   }
 
   saveInfo() {
     this.updateBasicInfo.emit(this.newInfo);
-    this.bsModalService.hide();
+    this.closeModal();
   }
 
 }

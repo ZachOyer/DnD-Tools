@@ -10,10 +10,10 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav me-auto">
             <li class="nav-item hover-shadow">
-              <a (click)="setCurrentTab(1)" [ngClass]="{'active': currentTab === 1}" class="nav-link" routerLinkActive="active" routerLink="/dice-roller">Dice Roller</a>
+              <a [ngClass]="{'active': router.url.indexOf('dice-roller') !== -1}" class="nav-link" routerLink="/dice-roller">Dice Roller</a>
             </li>
             <li class="nav-item hover-shadow">
-              <a (click)="setCurrentTab(2)" [ngClass]="{'active': currentTab === 2}" class="nav-link" routerLinkActive="active" routerLink="/info-sheet">Information Sheet</a>
+              <a [ngClass]="{'active': router.url.indexOf('info-sheet') !== -1}" class="nav-link" routerLink="/info-sheet">Information Sheet</a>
             </li>
             <li class="nav-item">
               <a class="nav-link disabled" href="#">Magic Database</a>

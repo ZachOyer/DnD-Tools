@@ -1,38 +1,40 @@
-<div class="container pb-4">
-  <button (click)="closeModal()" class="btn close"><fa-icon [icon]="faClose"></fa-icon></button>
-  <div class="row mb-1">
-    <h1>Edit Basic Info</h1>
+<div class="modal-content">
+  <div class="modal-header">
+    <h1 class="mt-2">{{title}}<span class="blinking">|</span></h1>
+    <button style="color: white;" class='btn close-button close' (click)="closeModal()" type="button" aria-label="Close">
+      <fa-icon [icon]="faClose"></fa-icon>
+    </button>
   </div>
-  <div class="row mx-auto">
-    <div class="row mx-auto">
+  <div class="modal-body">
+    <div class="row mx-0 mb-3">
       <span class="label">Character Name</span>
-      <input id="firstInput" type="text" class="form-control text-info" [(ngModel)]="newInfo.name">
+      <input id="firstInput" type="text" class="form-control text-info" spellcheck="false" [(ngModel)]="newInfo.name">
     </div>
-    <div class="row mx-auto">
+    <div class="row mx-0 mb-3">
       <span class="label">Level</span>
       <input type="number" class="form-control text-info" [(ngModel)]="newInfo.level">
     </div>
-    <div class="row mx-auto">
+    <div class="row mx-0 mb-3">
       <span class="label">Class</span>
       <input type="text" class="form-control text-info" [(ngModel)]="newInfo.class">
     </div>
-    <div class="row mx-auto">
+    <div class="row mx-0 mb-3">
       <span class="label">Race</span>
       <input type="text" class="form-control text-info" [(ngModel)]="newInfo.race">
     </div>
-    <div class="row mx-auto">
+    <div class="row mx-0 mb-3">
       <span class="label">Background</span>
       <input type="text" class="form-control text-info" [(ngModel)]="newInfo.background">
     </div>
-    <div class="row mx-auto">
+    <div class="row mx-0 mb-3">
       <span class="label">Alignment</span>
       <input type="text" class="form-control text-info" [(ngModel)]="newInfo.alignment">
     </div>
-    <div class="row mx-auto" style="margin-bottom: 25px">
+    <div class="row mx-0 mb-4">
       <span class="label">XP</span>
       <input type="number" class="form-control text-info" [(ngModel)]="newInfo.xp">
     </div>
-    <div class="row mx-auto text-center" style="margin-bottom: 0px">
+    <div class="row mx-0 text-center">
       <div class="col">
         <button (click)="saveInfo()" class="btn btn-success">Save</button>
       </div>

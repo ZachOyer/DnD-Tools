@@ -17,6 +17,7 @@ import { CharacterService } from './character/character.service';
 import { CharacterCreationComponent } from './character-creation/character-creation.component';
 import { NewCharacterComponent } from './character-creation/new-character/new-character.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { EditBattleStatsComponent } from './edit-info-modals/edit-battle-stats/edit-battle-stats.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
     EditStatsModalComponent,
     CharacterCreationComponent,
     NewCharacterComponent,
+    EditBattleStatsComponent,
   ],
   imports: [
     BrowserModule,

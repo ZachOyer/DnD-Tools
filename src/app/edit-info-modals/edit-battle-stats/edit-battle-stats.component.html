@@ -1,0 +1,34 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h1 class="mt-2">{{title}}<span class="blinking">|</span></h1>
+    <button style="color: white;" class='btn close-button close' (click)="closeModal()" type="button" aria-label="Close">
+      <fa-icon [icon]="faClose"></fa-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row mx-0 mb-3">
+      <span class="label">Armor Class</span>
+      <input id="firstInput" type="number" class="form-control text-info" [(ngModel)]="newInfo.armorClass">
+    </div>
+    <div class="row mx-0 mb-3">
+      <span class="label">Initiative</span>
+      <input type="number" class="form-control text-info" [(ngModel)]="newInfo.initiative">
+    </div>
+    <div class="row mx-0 mb-3">
+      <span class="label">Speed</span>
+      <input type="number" class="form-control text-info" [(ngModel)]="newInfo.speed">
+    </div>
+    <div class="row mx-0 mb-4">
+      <span class="label">Maximum Hit Points</span>
+      <input type="number" class="form-control text-info" [(ngModel)]="newInfo.maxHitPoints">
+    </div>
+    <div class="row mx-0 text-center">
+      <div class="col">
+        <button (click)="saveInfo()" class="btn btn-success">Save</button>
+      </div>
+      <div class="col">
+        <button (click)="closeModal()" class="btn btn-danger">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

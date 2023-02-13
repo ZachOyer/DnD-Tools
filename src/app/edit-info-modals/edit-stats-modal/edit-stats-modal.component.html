@@ -1,34 +1,36 @@
-<div class="container pb-4">
-  <button (click)="closeModal()" class="btn close"><fa-icon [icon]="faClose"></fa-icon></button>
-  <div class="row mb-1">
-    <h1>Edit Basic Info</h1>
+<div class="modal-content pb-3">
+  <div class="modal-header">
+    <h1 class="mt-2">{{title}}<span class="blinking">|</span></h1>
+    <button style="color: white;" class='btn close-button close' (click)="closeModal()" type="button" aria-label="Close">
+      <fa-icon [icon]="faClose"></fa-icon>
+    </button>
   </div>
-  <div class="row mx-auto">
-    <div class="row mx-auto">
+  <div class="modal-body">
+    <div class="row mx-0 mb-3">
       <span class="label">Strength</span>
-      <input id="firstInput" type="number" class="form-control text-info" [(ngModel)]="newStats.strength">
+      <input id="firstInput" type="number" class="form-control text-info" [(ngModel)]="newInfo.strength">
     </div>
-    <div class="row mx-auto">
+    <div class="row mx-0 mb-3">
       <span class="label">Dexterity</span>
-      <input type="number" class="form-control text-info" [(ngModel)]="newStats.dexterity">
+      <input type="number" class="form-control text-info" [(ngModel)]="newInfo.dexterity">
     </div>
-    <div class="row mx-auto">
+    <div class="row mx-0 mb-3">
       <span class="label">Constitution</span>
-      <input type="number" class="form-control text-info" [(ngModel)]="newStats.constitution">
+      <input type="number" class="form-control text-info" [(ngModel)]="newInfo.constitution">
     </div>
-    <div class="row mx-auto">
+    <div class="row mx-0 mb-3">
       <span class="label">Intelligence</span>
-      <input type="number" class="form-control text-info" [(ngModel)]="newStats.intelligence">
+      <input type="number" class="form-control text-info" [(ngModel)]="newInfo.intelligence">
     </div>
-    <div class="row mx-auto">
+    <div class="row mx-0 mb-3">
       <span class="label">Wisdom</span>
-      <input type="number" class="form-control text-info" [(ngModel)]="newStats.wisdom">
+      <input type="number" class="form-control text-info" [(ngModel)]="newInfo.wisdom">
     </div>
-    <div class="row mx-auto" style="margin-bottom: 25px">
+    <div class="row mx-0 mb-4">
       <span class="label">Charisma</span>
-      <input type="number" class="form-control text-info" [(ngModel)]="newStats.charisma">
+      <input type="number" class="form-control text-info" [(ngModel)]="newInfo.charisma">
     </div>
-    <div class="row mx-auto text-center" style="margin-bottom: 0px">
+    <div class="row mx-0 text-center">
       <div class="col">
         <button (click)="saveInfo()" class="btn btn-success">Save</button>
       </div>

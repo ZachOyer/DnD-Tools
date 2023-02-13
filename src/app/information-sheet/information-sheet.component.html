@@ -6,7 +6,7 @@
         <div class="form-group select-character">
           <label for="select-character" class="form-label mb-0 mt-2"> Select Character <fa-icon [icon]="faSelectChar"></fa-icon></label>
           <select #char1 (change)="setCurrentCharacter(char1.value)" class="form-select" id="select-character">
-            <option>-- Characters --</option>
+            <!-- <option>-- Characters --</option> -->
             <option *ngFor="let character of characters" value={{character.id}}>{{character.name}}</option>
           </select>
         </div>
@@ -216,9 +216,7 @@
 
   <div class="row">
     <div class="section">
-      <div (click)="changeOtherInfo()" id="section-bar">
-        <fa-icon *ngIf="!otherEdit" class="edit-button" [icon]="faEdit"></fa-icon>
-        <fa-icon *ngIf="otherEdit" class="edit-button" [icon]="faSave"></fa-icon>
+      <div id="section-bar">
         <h3>Other Info</h3>
       </div>
       <div class="row">
@@ -325,7 +323,11 @@
 
 
         <div class="col">
-          <h6>Attacks</h6>
+          <h6 class="attack-header" style="position: relative">
+            Attacks
+            <div class="add-attack"><fa-icon [icon]="faAdd"></fa-icon></div>
+            <div class="remove-attack"><fa-icon [icon]="faRemove"></fa-icon></div>
+          </h6>
           <div class="scrollable" style="max-height: 750px">
             <div class="attacks" *ngFor="let attack of characters[currentCharacterIndex].attacks">
               <div class="card border-dark mb-3" style="max-width: 20rem;">

@@ -1,26 +1,24 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'app-edit-stats-modal',
-  templateUrl: './edit-stats-modal.component.html',
-  styleUrls: ['./edit-stats-modal.component.sass']
+  selector: 'app-edit-battle-stats',
+  templateUrl: './edit-battle-stats.component.html',
+  styleUrls: ['./edit-battle-stats.component.sass']
 })
-export class EditStatsModalComponent implements OnInit {
+export class EditBattleStatsComponent implements OnInit {
   faClose = faXmark;
 
-  title = ''
+  title = '';
   newInfo = {
-    strength: 0,
-    dexterity: 0,
-    constitution: 0,
-    intelligence: 0,
-    wisdom: 0,
-    charisma: 0,
+    armorClass: 0,
+    initiative: 0,
+    speed: 0,
+    maxHitPoints: 0
   }
 
-  @Output() updateStats = new EventEmitter();
+  @Output() updateBasicInfo = new EventEmitter();
 
   constructor(private bsModalRef: BsModalRef) { }
 
@@ -33,7 +31,7 @@ export class EditStatsModalComponent implements OnInit {
     //Add 'implements AfterViewInit' to the class.
     setTimeout(() => {
       document.getElementById('firstInput')?.focus();
-      const titleToSet = 'Edit Stats';
+      const titleToSet = 'Edit Battle Stats';
       for (let i = 0; i < titleToSet.length; i++) {
         setTimeout(() => {
           this.title = titleToSet.slice(0, i + 1);
@@ -49,8 +47,7 @@ export class EditStatsModalComponent implements OnInit {
   }
 
   saveInfo() {
-    this.updateStats.emit(this.newInfo);
+    this.updateBasicInfo.emit(this.newInfo);
     this.closeModal();
   }
-
 }
