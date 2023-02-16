@@ -233,10 +233,22 @@ export class CharacterService {
 
   setCurrentCharacterIndex(index: number) {
     this.currentCharacterIndex = index;
+    localStorage.setItem('currCharIndex', JSON.stringify(index));
   }
 
-  getCurrentCharacterIndex(): number {
-    return this.currentCharacterIndex;
+  getCurrentCharacterIndex(maxLength: number): number {
+    if (localStorage.getItem('currCharIndex')) {
+      let index = JSON.parse(localStorage.getItem('currCharIndex') || '0');
+      // Check to see if the index is out of bounds
+      // Error handling in case the local storage data has been tampered with
+      if (index < 0 || index >= maxLength) {
+        return 0;
+      } else {
+        return index;
+      }
+    } else {
+      return this.currentCharacterIndex;
+    }
   }
 
   getHardcodedData() {

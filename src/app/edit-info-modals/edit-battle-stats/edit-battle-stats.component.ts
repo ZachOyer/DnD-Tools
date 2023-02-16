@@ -18,7 +18,7 @@ export class EditBattleStatsComponent implements OnInit {
     maxHitPoints: 0
   }
 
-  @Output() updateBasicInfo = new EventEmitter();
+  @Output() updateBattleStats = new EventEmitter();
 
   constructor(private bsModalRef: BsModalRef) { }
 
@@ -47,7 +47,7 @@ export class EditBattleStatsComponent implements OnInit {
   }
 
   saveInfo() {
-    this.updateBasicInfo.emit(this.newInfo);
+    this.updateBattleStats.emit(this.newInfo);
     this.closeModal();
   }
 }

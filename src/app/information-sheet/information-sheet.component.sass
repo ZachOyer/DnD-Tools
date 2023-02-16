@@ -155,23 +155,8 @@ h6
   font-family: 'Arima', cursive
   background-color: #30115e
 
-.add-attack
-  position: absolute
-  right: 10px
-  top: 1px
-  transition: color 0.5s ease-out
-
-.remove-attack
-  position: absolute
-  left: 10px
-  top: 1px
-  transition: color 0.5s ease-out
-
-.add-attack:hover, .remove-attack:hover
-  color: #4f91a5
+.alert-link
   cursor: pointer
-  animation: spin 0.5s linear 1
-  -webkit-animation: spin 0.5s linear 1
 
 /* width */
 ::-webkit-scrollbar
@@ -247,32 +232,3 @@ h6
   40%,
   70%
     box-shadow: 0 0 50px #b0f, 10px 0 40px #ff0000, -10px 0 40px #3ff
-
-@-webkit-keyframes spin
-  0%
-    transform: scale(1)
-  20%
-    transform: scale(1.05)
-  40%
-    transform: scale(1.1)
-  60%
-    transform: scale(1.15)
-  80%
-    transform: scale(1.2)
-  100%
-    transform: scale(1)
-
-@keyframes spin
-  0%
-    transform: scale(1)
-  20%
-    transform: scale(1.05)
-  40%
-    transform: scale(1.1)
-  60%
-    transform: scale(1.15)
-  80%
-    transform: scale(1.2)
-  100%
-    transform: scale(1)
-

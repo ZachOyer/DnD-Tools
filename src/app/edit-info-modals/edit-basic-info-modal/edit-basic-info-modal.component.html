@@ -34,13 +34,9 @@
       <span class="label">XP</span>
       <input type="number" class="form-control text-info" [(ngModel)]="newInfo.xp">
     </div>
-    <div class="row mx-0 text-center">
-      <div class="col">
-        <button (click)="saveInfo()" class="btn btn-success">Save</button>
-      </div>
-      <div class="col">
-        <button (click)="closeModal()" class="btn btn-danger">Cancel</button>
-      </div>
+    <div class="float-right text-center">
+      <button (click)="saveInfo()" class="btn btn-success me-3">Save</button>
+      <button (click)="closeModal()" class="btn btn-danger">Cancel</button>
     </div>
   </div>
 </div>

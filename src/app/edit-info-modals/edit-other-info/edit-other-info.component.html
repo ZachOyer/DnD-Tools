@@ -1,0 +1,70 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h1 class="mt-2">{{title}}<span class="blinking">|</span></h1>
+    <button style="color: white;" class='btn close-button close' (click)="closeModal()" type="button" aria-label="Close">
+      <fa-icon [icon]="faClose"></fa-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="proficienciesTab" data-bs-toggle="tab" href="#proficiency" aria-selected="false" role="tab" tabindex="-1"><h3>Proficiency</h3></a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="attacksTab" data-bs-toggle="tab" href="#attacks" aria-selected="true" role="tab"><h3>Attacks</h3></a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="languagesTab" data-bs-toggle="tab" href="#languages" aria-selected="false" role="tab"><h3>Languages</h3></a>
+      </li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade active show" id="proficiency" role="tabpanel">
+        <div class="row mx-0">
+          <div class="col-12">{{character?.proficiencies?.acrobatics}}</div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="attacks" role="tabpanel">
+        <div class="row text-center">
+          <div class="col">Name</div>
+          <div class="col">Range</div>
+          <div class="col-auto">Attack Bonus</div>
+          <div class="col">Rolls</div>
+          <div class="col">Dice size</div>
+          <div class="col-auto">Damage Bonus</div>
+          <div class="col">Type</div>
+        </div>
+        <div class="row">
+
+        </div>
+      </div>
+      <div class="tab-pane fade" id="languages" role="tabpanel">
+        <div class="row mt-2">
+          <div class="col-6">
+            <h4 class="text-center">Current Languages</h4>
+            <div class="row mx-0 my-3 language-option" *ngFor="let language of character?.languages; let i = index">
+              <div class="col-12">{{language}}</div>
+              <div class="remove-button" (click)="removeLanguage(i)">Remove</div>
+            </div>
+            <div class="row mx-0 my-3">
+              <div class="col-12 empty-text text-center" *ngIf="(character?.languages?.length || 0) < 1">I've never met a mute before...</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <h4 class="text-center">Add a new language:</h4>
+            <div class="input-group">
+              <input class="form-control" list="language" placeholder="Language Name..." type="text" [(ngModel)]="newLanguage">
+              <button class="btn btn-success btn-sm" (click)="addLanguage()"><fa-icon [icon]="faAdd"></fa-icon></button>
+              <datalist id="language">
+                <option value="Elvish">
+              </datalist>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="float-right text-center">
+      <button (click)="saveInfo()" class="btn btn-success me-3">Save</button>
+      <button (click)="closeModal()" class="btn btn-danger">Cancel</button>
+    </div>
+  </div>
+</div>

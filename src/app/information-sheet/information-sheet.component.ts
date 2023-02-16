@@ -8,6 +8,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { EditBasicInfoModalComponent } from '../edit-info-modals/edit-basic-info-modal/edit-basic-info-modal.component';
 import { EditStatsModalComponent } from '../edit-info-modals/edit-stats-modal/edit-stats-modal.component';
 import { EditBattleStatsComponent } from '../edit-info-modals/edit-battle-stats/edit-battle-stats.component';
+import { EditOtherInfoComponent } from '../edit-info-modals/edit-other-info/edit-other-info.component';
 
 @Component({
   selector: 'app-information-sheet',
@@ -57,14 +58,7 @@ export class InformationSheetComponent implements OnInit {
   faAdd = faPlus;
   faRemove = faMinus;
 
-  basicEdit = false;
-  statsEdit = false;
-  battleEdit = false;
-  otherEdit = false;
-
   includeElectrum = true;
-  showAtkAlert = true;
-  showMoneyAlert = true;
 
   // ------- SET TO TRUE TO RE-ENTER DATA ON LOCAL STORAGE ---------
   reenterData = true;
@@ -87,7 +81,7 @@ export class InformationSheetComponent implements OnInit {
       localStorage.setItem('characters', JSON.stringify(this.charService.getHardcodedData()));
     }
     this.characters = this.charService.getCharacters();
-    this.currentCharacterIndex = this.charService.getCurrentCharacterIndex();
+    this.currentCharacterIndex = this.charService.getCurrentCharacterIndex(this.characters.length);
     document.documentElement.style.setProperty("--duration", "2s");
   }
 
@@ -96,7 +90,6 @@ export class InformationSheetComponent implements OnInit {
   }
 
   setCurrentCharacter(index: string) {
-    this.resetAlerts();
     this.charService.setCurrentCharacterIndex(Number(index));
     this.currentCharacterIndex = Number(index);
   }
@@ -123,11 +116,6 @@ export class InformationSheetComponent implements OnInit {
     this.characters[this.currentCharacterIndex].currency.electrum = 0;
   }
 
-  resetAlerts() {
-    this.showAtkAlert = true;
-    this.showMoneyAlert = true;
-  }
-
   calcHealth(): string {
     if (this.characters[this.currentCharacterIndex].hitPoints == 0) {
       return '';
@@ -141,6 +129,18 @@ export class InformationSheetComponent implements OnInit {
       return 'low-health';
     }
     return '';
+  }
+
+  initCurrency() {
+    if (!this.characters[this.currentCharacterIndex]?.currency) {
+      this.characters[this.currentCharacterIndex].currency = {
+        copper: 0,
+        silver: 0,
+        electrum: 0,
+        gold: 0,
+        platinum: 0
+      }
+    }
   }
 
   convertUp(currency: string) {
@@ -257,7 +257,7 @@ export class InformationSheetComponent implements OnInit {
     this.bsModalRef.content.newInfo.initiative = this.characters[this.currentCharacterIndex].initiative;
     this.bsModalRef.content.newInfo.speed = this.characters[this.currentCharacterIndex].speed;
     this.bsModalRef.content.newInfo.maxHitPoints = this.characters[this.currentCharacterIndex].maxHitPoints;
-    this.bsModalRef.content.updateBasicInfo.subscribe((info: any) => {
+    this.bsModalRef.content.updateBattleStats.subscribe((info: any) => {
       this.characters[this.currentCharacterIndex].armorClass = info?.armorClass;
       this.characters[this.currentCharacterIndex].initiative = info?.initiative;
       this.characters[this.currentCharacterIndex].speed = info?.speed;
@@ -268,6 +268,14 @@ export class InformationSheetComponent implements OnInit {
       this.updateInfo();
       this.ref.detectChanges();
     })
+  }
+
+  changeOtherInfo(openTo?: number) {
+    this.bsModalRef = this.bsModalService.show(EditOtherInfoComponent, {class: 'modal-lg modal-dialog-centered'});
+    this.bsModalRef.content.character = this.characters[this.currentCharacterIndex];
+    if (openTo) {
+      this.bsModalRef.content.openToTab = openTo;
+    }
   }
 
 
