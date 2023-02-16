@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { faArrowsDownToPeople, faArrowUpWideShort, faBolt, faBrain, faCircleArrowUp, faCircleCheck, faCircleLeft, faCoins, faCommentSlash, faDice, faFilePen, faHandFist, faHeart, faMasksTheater, faMinus, faPersonHiking, faPersonRunning, faPlus, faRotate, faSackXmark, faScroll, faShield, faSlash, faWandMagic, faWandMagicSparkles, faWandSparkles } from '@fortawesome/free-solid-svg-icons';
 import { faCircle, faCircleDot, faCircleRight } from '@fortawesome/free-regular-svg-icons';
 import { CharacterService } from '../character/character.service';
-import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { EditBasicInfoModalComponent } from '../edit-info-modals/edit-basic-info-modal/edit-basic-info-modal.component';

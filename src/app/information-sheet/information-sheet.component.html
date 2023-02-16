@@ -412,7 +412,7 @@
             <div>
               <span *ngFor="let language of characters[currentCharacterIndex].languages" class="badge rounded-pill bg-primary" style="margin-right: 4px; margin-bottom: 8px;">{{language}}</span>
             </div>
-            <div *ngIf="!characters[currentCharacterIndex].languages" class="alert alert-secondary">
+            <div *ngIf="!characters[currentCharacterIndex].languages || characters[currentCharacterIndex].languages?.length < 1" class="alert alert-secondary">
               <fa-icon class="mt-3 mb-2" style="font-size: 30px; color: indigo" [icon]="faNoSpeak"></fa-icon><br>
               <div>You can't speak any languages!</div>
               <a (click)="changeOtherInfo(2)" class="alert-link">Add a language</a>
