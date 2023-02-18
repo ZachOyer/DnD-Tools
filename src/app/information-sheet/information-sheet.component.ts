@@ -271,10 +271,18 @@ export class InformationSheetComponent implements OnInit {
 
   changeOtherInfo(openTo?: number) {
     this.bsModalRef = this.bsModalService.show(EditOtherInfoComponent, {class: 'modal-lg modal-dialog-centered'});
-    this.bsModalRef.content.character = this.characters[this.currentCharacterIndex];
+    let testing = structuredClone(this.characters[this.currentCharacterIndex]);
+    this.bsModalRef.content.character = testing;
     if (openTo) {
       this.bsModalRef.content.openToTab = openTo;
     }
+  }
+
+  calcProficiencyBonus(level: number) {
+    if (level) {
+      return Math.trunc(2 + ((level - 1) / 4))
+    }
+    return 0;
   }
 
 

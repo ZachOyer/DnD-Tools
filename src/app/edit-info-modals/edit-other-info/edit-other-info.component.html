@@ -8,21 +8,304 @@
   <div class="modal-body">
     <ul class="nav nav-tabs" role="tablist">
       <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="proficienciesTab" data-bs-toggle="tab" href="#proficiency" aria-selected="false" role="tab" tabindex="-1"><h3>Proficiency</h3></a>
+        <a class="nav-link active" id="proficienciesTab" data-bs-toggle="tab" href="#proficiency" aria-selected="false" role="tab" tabindex="-1"><h3 class="mb-0">Proficiency</h3></a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link" id="attacksTab" data-bs-toggle="tab" href="#attacks" aria-selected="true" role="tab"><h3>Attacks</h3></a>
+        <a class="nav-link" id="attacksTab" data-bs-toggle="tab" href="#attacks" aria-selected="true" role="tab"><h3 class="mb-0">Attacks</h3></a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link" id="languagesTab" data-bs-toggle="tab" href="#languages" aria-selected="false" role="tab"><h3>Languages</h3></a>
+        <a class="nav-link" id="languagesTab" data-bs-toggle="tab" href="#languages" aria-selected="false" role="tab"><h3 class="mb-0">Languages</h3></a>
       </li>
     </ul>
     <div id="myTabContent" class="tab-content mb-2">
-      <div class="tab-pane fade active show" id="proficiency" role="tabpanel">
-        <div class="row mx-0">
-          <div class="col-12">{{character?.proficiencies?.acrobatics}}</div>
+
+      <div class="tab-pane fade active show" style="position: relative" id="proficiency" role="tabpanel">
+        <h4 class="my-2 ps-3 prof-bonus" *ngIf="character">Proficiency Bonus: {{calcProficiencyBonus(character.level)}}</h4>
+        <div class="row mx-0 text-center">
+          <div class="col-2">
+          </div>
+          <div class="col-3">
+            <h4>Proficiency</h4>
+          </div>
+          <div class="col-3">
+            <h4>Name</h4>
+          </div>
+          <div class="col-4">
+            <h4>Based on Stat</h4>
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-0">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-0">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('acrobatics', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('acrobatics', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.acrobatics}}
+          </div>
+          <div class="col-3">
+            Acrobatics
+          </div>
+          <div class="col-4">
+            Dexterity ({{character ? getMod(character.dexterity) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-1">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-1">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('animal handling', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('animal handling', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.animalHandling}}
+          </div>
+          <div class="col-3">
+            Animal Handling
+          </div>
+          <div class="col-4">
+            Wisdom ({{character ? getMod(character.wisdom) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-2">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-2">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('arcana', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('arcana', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.arcana}}
+          </div>
+          <div class="col-3">
+            Arcana
+          </div>
+          <div class="col-4">
+            Intelligence ({{character ? getMod(character.intelligence) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-3">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-3">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('athletics', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('athletics', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.athletics}}
+          </div>
+          <div class="col-3">
+            Athletics
+          </div>
+          <div class="col-4">
+            Strength ({{character ? getMod(character.strength) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-4">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-4">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('deception', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('deception', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.deception}}
+          </div>
+          <div class="col-3">
+            Deception
+          </div>
+          <div class="col-4">
+            Charisma ({{character ? getMod(character.charisma) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-5">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-5">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('history', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('history', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.history}}
+          </div>
+          <div class="col-3">
+            History
+          </div>
+          <div class="col-4">
+            Intelligence ({{character ? getMod(character.intelligence) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-6">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-6">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('insight', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('insight', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.insight}}
+          </div>
+          <div class="col-3">
+            Insight
+          </div>
+          <div class="col-4">
+            Wisdom ({{character ? getMod(character.wisdom) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-7">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-7">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('intimidation', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('intimidation', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.intimidation}}
+          </div>
+          <div class="col-3">
+            Intimidation
+          </div>
+          <div class="col-4">
+            Charisma ({{character ? getMod(character.charisma) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-8">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-8">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('investigation', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('investigation', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.investigation}}
+          </div>
+          <div class="col-3">
+            Investigation
+          </div>
+          <div class="col-4">
+            Intelligence ({{character ? getMod(character.intelligence) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-9">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-9">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('medicine', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('medicine', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.medicine}}
+          </div>
+          <div class="col-3">
+            Medicine
+          </div>
+          <div class="col-4">
+            Wisdom ({{character ? getMod(character.wisdom) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-10">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-10">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('nature', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('nature', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.nature}}
+          </div>
+          <div class="col-3">
+            Nature
+          </div>
+          <div class="col-4">
+            Intelligence ({{character ? getMod(character.intelligence) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-11">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-11">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('perception', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('perception', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.perception}}
+          </div>
+          <div class="col-3">
+            Perception
+          </div>
+          <div class="col-4">
+            Wisdom ({{character ? getMod(character.wisdom) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-12">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-12">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('performance', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('performance', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.performance}}
+          </div>
+          <div class="col-3">
+            Performance
+          </div>
+          <div class="col-4">
+            Charisma ({{character ? getMod(character.charisma) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-13">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-13">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('persuasion', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('persuasion', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.persuasion}}
+          </div>
+          <div class="col-3">
+            Persuasion
+          </div>
+          <div class="col-4">
+            Charisma ({{character ? getMod(character.charisma) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-14">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-14">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('religion', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('religion', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.religion}}
+          </div>
+          <div class="col-3">
+            Religion
+          </div>
+          <div class="col-4">
+            Intelligence ({{character ? getMod(character.intelligence) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-15">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-15">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('sleight of hand', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('sleight of hand', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.sleightOfHand}}
+          </div>
+          <div class="col-3">
+            Sleight Of Hand
+          </div>
+          <div class="col-4">
+            Dexterity ({{character ? getMod(character.dexterity) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-16">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-16">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('stealth', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('stealth', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.stealth}}
+          </div>
+          <div class="col-3">
+            Stealth
+          </div>
+          <div class="col-4">
+            Dexterity ({{character ? getMod(character.dexterity) : 0}})
+          </div>
+        </div>
+        <div class="row py-2 mx-0 text-center proficiency-option" id="proficiency-17">
+          <div class="col-2 proficiency-buttons" id="proficiency-button-17">
+            <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('survival', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
+            <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('survival', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
+          </div>
+          <div class="col-3">
+            {{character?.proficiencies?.survival}}
+          </div>
+          <div class="col-3">
+            Survival
+          </div>
+          <div class="col-4">
+            Wisdom ({{character ? getMod(character.wisdom) : 0}})
+          </div>
         </div>
       </div>
+
       <div class="tab-pane fade" id="attacks" role="tabpanel">
         <div class="row text-center">
           <div class="col">Name</div>

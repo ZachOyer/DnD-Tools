@@ -18,7 +18,6 @@ export interface Character {
   intelligence: number;
   wisdom: number;
   charisma: number;
-  proficiencyBonus: number;
 
   // Battle stats
   maxHitPoints: number;
@@ -38,7 +37,7 @@ export interface Character {
   };
   equipment?: string[];
   traits?: string[];
-  proficiencies?: {
+  proficiencies: {
     acrobatics: number;
     animalHandling: number;
     arcana: number;

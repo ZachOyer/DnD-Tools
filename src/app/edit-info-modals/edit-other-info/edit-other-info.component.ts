@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
-import { faArrowLeftLong, faArrowRight, faArrowRightLong, faArrowTurnUp, faPlus, faTrash, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeftLong, faArrowRight, faArrowRightLong, faArrowTurnUp, faDownLong, faPlus, faTrash, faUpLong, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Character } from 'src/app/shared/character.model';
 
@@ -35,6 +35,8 @@ export class EditOtherInfoComponent implements OnInit {
   faRemove = faTrash;
   faAutoFill = faArrowLeftLong;
   faRightArrow = faArrowRightLong;
+  faImprove = faUpLong;
+  faWorsen = faDownLong;
 
   title = '';
   character: Character | null = null;
@@ -44,17 +46,54 @@ export class EditOtherInfoComponent implements OnInit {
   languages = ["Abyssal", "Aquan", "Auran", "Celestial", "Common", "Deep Speech", "Draconic", "Druidic", "Dwarvish", "Elvish", "Giant", "Gnomish", "Goblin", "Gnoll", "Halfling", "Ignan", "Infernal", "Orc", "Primordial", "Sylvan", "Terran", "Undercommon"];
   filteredLanguages: string[] = [];
 
-  @Output() updateBattleStats = new EventEmitter();
+  @Output() updateOtherInfo = new EventEmitter();
 
   constructor(private bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
+    let testing: HTMLElement | null;
+    for (let i = 0; i < 18; i++) {
+      testing = document.getElementById("proficiency-" + i);
+      testing?.addEventListener("mouseover", (event) => {
+        document.getElementById("proficiency-button-" + i)?.setAttribute('style', 'opacity: 1');
+        if (i > 0) {
+          document.getElementById("proficiency-button-" + (i - 1))?.setAttribute('style', "opacity: 0.3");
+        }
+        if (i > 1) {
+          document.getElementById("proficiency-button-" + (i - 2))?.setAttribute('style', "opacity: 0.1");
+        }
+        if (i < 17) {
+          document.getElementById("proficiency-button-" + (i + 1))?.setAttribute('style', "opacity: 0.3");
+        }
+        if (i < 16) {
+          document.getElementById("proficiency-button-" + (i + 2))?.setAttribute('style', "opacity: 0.1");
+        }
+      })
+      testing?.addEventListener("mouseleave", (event) => {
+        document.getElementById("proficiency-button-" + i)?.setAttribute('style', 'opacity: 0');
+        if (i > 0) {
+          document.getElementById("proficiency-button-" + (i - 1))?.setAttribute('style', "opacity: 0");
+        }
+        if (i > 1) {
+          document.getElementById("proficiency-button-" + (i - 2))?.setAttribute('style', "opacity: 0");
+        }
+        if (i < 17) {
+          document.getElementById("proficiency-button-" + (i + 1))?.setAttribute('style', "opacity: 0");
+        }
+        if (i < 16) {
+          document.getElementById("proficiency-button-" + (i + 2))?.setAttribute('style', "opacity: 0");
+        }
+      })
+    }
   }
 
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     setTimeout(() => {
+      // if (this.character) {
+      //   console.log(Object.keys(this.character.proficiencies));
+      // }
       if (this.openToTab === 1) {
         // console.log("Opening to Attacks");
         document.getElementById('attacksTab')?.click();
@@ -62,7 +101,6 @@ export class EditOtherInfoComponent implements OnInit {
         document.getElementById('languagesTab')?.click();
       }
       this.fitlerLanguages();
-      // document.getElementById('firstInput')?.focus();
       const titleToSet = 'Edit Other Info';
       for (let i = 0; i < titleToSet.length; i++) {
         setTimeout(() => {
@@ -79,7 +117,7 @@ export class EditOtherInfoComponent implements OnInit {
   }
 
   saveInfo() {
-    this.updateBattleStats.emit(this.character);
+    this.updateOtherInfo.emit(this.character);
     this.closeModal();
   }
 
@@ -122,7 +160,138 @@ export class EditOtherInfoComponent implements OnInit {
 
   fitlerLanguages() {
     this.filteredLanguages = this.languages.filter((element: string) => {
-        return ((element.toLowerCase().indexOf(this.newLanguage.toLowerCase()) !== -1) && !this.character?.languages?.includes(element));
-      });
+      return ((element.toLowerCase().indexOf(this.newLanguage.toLowerCase()) !== -1) && !this.character?.languages?.includes(element));
+    });
+  }
+
+  getMod(stat: number): number {
+    return Math.floor(stat / 2) - 5;
+  }
+
+  calcProficiencyBonus(level: number) {
+    if (level) {
+      return Math.trunc(2 + ((level - 1) / 4))
+    }
+    return 0;
+  }
+
+  changeProficiency(proficiency: string, increase: boolean) {
+    if (this.character) {
+      if (increase) {
+        switch (proficiency) {
+          case "acrobatics":
+            this.character.proficiencies.acrobatics++;
+            break;
+          case "animal handling":
+            this.character.proficiencies.animalHandling++;
+            break;
+          case "arcana":
+            this.character.proficiencies.arcana++;
+            break;
+          case "athletics":
+            this.character.proficiencies.athletics++;
+            break;
+          case "deception":
+            this.character.proficiencies.deception++;
+            break;
+          case "history":
+            this.character.proficiencies.history++;
+            break;
+          case "insight":
+            this.character.proficiencies.insight++;
+            break;
+          case "intimidation":
+            this.character.proficiencies.intimidation++;
+            break;
+          case "investigation":
+            this.character.proficiencies.investigation++;
+            break;
+          case "medicine":
+            this.character.proficiencies.medicine++;
+            break;
+          case "nature":
+            this.character.proficiencies.nature++;
+            break;
+          case "perception":
+            this.character.proficiencies.perception++;
+            break;
+          case "performance":
+            this.character.proficiencies.performance++;
+            break;
+          case "persuasion":
+            this.character.proficiencies.persuasion++;
+            break;
+          case "religion":
+            this.character.proficiencies.religion++;
+            break;
+          case "sleight of hand":
+            this.character.proficiencies.sleightOfHand++;
+            break;
+          case "stealth":
+            this.character.proficiencies.stealth++;
+            break;
+          case "survival":
+            this.character.proficiencies.survival++;
+            break;
+        }
+      } else {
+        switch (proficiency) {
+          case "acrobatics":
+            this.character.proficiencies.acrobatics--;
+            break;
+          case "animal handling":
+            this.character.proficiencies.animalHandling--;
+            break;
+          case "arcana":
+            this.character.proficiencies.arcana--;
+            break;
+          case "athletics":
+            this.character.proficiencies.athletics--;
+            break;
+          case "deception":
+            this.character.proficiencies.deception--;
+            break;
+          case "history":
+            this.character.proficiencies.history--;
+            break;
+          case "insight":
+            this.character.proficiencies.insight--;
+            break;
+          case "intimidation":
+            this.character.proficiencies.intimidation--;
+            break;
+          case "investigation":
+            this.character.proficiencies.investigation--;
+            break;
+          case "medicine":
+            this.character.proficiencies.medicine--;
+            break;
+          case "nature":
+            this.character.proficiencies.nature--;
+            break;
+          case "perception":
+            this.character.proficiencies.perception--;
+            break;
+          case "performance":
+            this.character.proficiencies.performance--;
+            break;
+          case "persuasion":
+            this.character.proficiencies.persuasion--;
+            break;
+          case "religion":
+            this.character.proficiencies.religion--;
+            break;
+          case "sleight of hand":
+            this.character.proficiencies.sleightOfHand--;
+            break;
+          case "stealth":
+            this.character.proficiencies.stealth--;
+            break;
+          case "survival":
+            this.character.proficiencies.survival--;
+            break;
+        }
+      }
+    }
   }
 }

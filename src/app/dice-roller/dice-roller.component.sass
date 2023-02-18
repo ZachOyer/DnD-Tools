@@ -51,10 +51,10 @@ svg#clouds
     box-shadow: 0px 0px 5px 2px #008cff
 
 #disadvantage:hover
-  animation-name: flow-right
+  animation-name: float-down
   animation-duration: 2s
   animation-iteration-count: infinite
-  -webkit-animation-name: flow-right
+  -webkit-animation-name: float-down
   -webkit-animation-duration: 2s
   -webkit-animation-iteration-count: infinite
 
@@ -63,14 +63,14 @@ svg#clouds
   box-shadow: 0px 0px 20px 2px #008cff
 
 #advantage:hover
-  animation-name: flow-left
+  animation-name: float-up
   animation-duration: 2s
   animation-iteration-count: infinite
-  -webkit-animation-name: flow-left
+  -webkit-animation-name: float-up
   -webkit-animation-duration: 2s
   -webkit-animation-iteration-count: infinite
 
-@-webkit-keyframes flow-right
+@-webkit-keyframes float-down
   0%,
   100%
     -webkit-transform: translateY(0)
@@ -81,7 +81,7 @@ svg#clouds
     -ms-transform: translateY(7px)
     transform: translateY(7px)
 
-@keyframes flow-right
+@keyframes float-down
   0%,
   100%
     -webkit-transform: translateY(0)
@@ -92,7 +92,7 @@ svg#clouds
     -ms-transform: translateY(7px)
     transform: translateY(7px)
 
-@-webkit-keyframes flow-left
+@-webkit-keyframes float-up
   0%,
   100%
     -webkit-transform: translateY(0)
@@ -103,7 +103,7 @@ svg#clouds
     -ms-transform: translateY(-7px)
     transform: translateY(-7px)
 
-@keyframes flow-left
+@keyframes float-up
   0%,
   100%
     -webkit-transform: translateY(0)
