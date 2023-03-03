@@ -2,6 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, OnInit, Output, Pipe, PipeTransform } from '@angular/core';
 import { faArrowLeftLong, faArrowRight, faArrowRightLong, faArrowTurnUp, faDownLong, faPlus, faTrash, faUpLong, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Attack } from 'src/app/shared/attack';
 import { Character } from 'src/app/shared/character.model';
 
 
@@ -26,6 +27,16 @@ import { Character } from 'src/app/shared/character.model';
         animate('0.4s 0.4s ease-out'),
         style({ transform: 'translateY(0%)', opacity: 1})
       ])
+    ]),
+    trigger('flattenInOut', [
+      transition('* => void', [
+        animate('0.4s ease-in-out'),
+        style({ height: '0px'})
+      ]),
+      transition('void => *', [
+        style({ height: '0px'}),
+        animate('0.4s ease-in-out')
+      ])
     ])
   ]
 })
@@ -37,6 +48,8 @@ export class EditOtherInfoComponent implements OnInit {
   faRightArrow = faArrowRightLong;
   faImprove = faUpLong;
   faWorsen = faDownLong;
+
+  testing = false;
 
   title = '';
   character: Character | null = null;
@@ -51,40 +64,40 @@ export class EditOtherInfoComponent implements OnInit {
   constructor(private bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
-    let testing: HTMLElement | null;
-    for (let i = 0; i < 18; i++) {
-      testing = document.getElementById("proficiency-" + i);
-      testing?.addEventListener("mouseover", (event) => {
-        document.getElementById("proficiency-button-" + i)?.setAttribute('style', 'opacity: 1');
-        if (i > 0) {
-          document.getElementById("proficiency-button-" + (i - 1))?.setAttribute('style', "opacity: 0.3");
-        }
-        if (i > 1) {
-          document.getElementById("proficiency-button-" + (i - 2))?.setAttribute('style', "opacity: 0.1");
-        }
-        if (i < 17) {
-          document.getElementById("proficiency-button-" + (i + 1))?.setAttribute('style', "opacity: 0.3");
-        }
-        if (i < 16) {
-          document.getElementById("proficiency-button-" + (i + 2))?.setAttribute('style', "opacity: 0.1");
-        }
-      })
-      testing?.addEventListener("mouseleave", (event) => {
-        document.getElementById("proficiency-button-" + i)?.setAttribute('style', 'opacity: 0');
-        if (i > 0) {
-          document.getElementById("proficiency-button-" + (i - 1))?.setAttribute('style', "opacity: 0");
-        }
-        if (i > 1) {
-          document.getElementById("proficiency-button-" + (i - 2))?.setAttribute('style', "opacity: 0");
-        }
-        if (i < 17) {
-          document.getElementById("proficiency-button-" + (i + 1))?.setAttribute('style', "opacity: 0");
-        }
-        if (i < 16) {
-          document.getElementById("proficiency-button-" + (i + 2))?.setAttribute('style', "opacity: 0");
-        }
-      })
-    }
+    // let testing: HTMLElement | null;
+    // for (let i = 0; i < 18; i++) {
+    //   testing = document.getElementById("proficiency-" + i);
+    //   testing?.addEventListener("mouseover", (event) => {
+    //     document.getElementById("proficiency-button-" + i)?.setAttribute('style', 'opacity: 1; transform: translateY(0px)');
+    //     if (i > 0) {
+    //       document.getElementById("proficiency-button-" + (i - 1))?.setAttribute('style', "opacity: 0.3");
+    //     }
+    //     if (i > 1) {
+    //       document.getElementById("proficiency-button-" + (i - 2))?.setAttribute('style', "opacity: 0.1");
+    //     }
+    //     if (i < 17) {
+    //       document.getElementById("proficiency-button-" + (i + 1))?.setAttribute('style', "opacity: 0.3");
+    //     }
+    //     if (i < 16) {
+    //       document.getElementById("proficiency-button-" + (i + 2))?.setAttribute('style', "opacity: 0.1");
+    //     }
+    //   })
+    //   testing?.addEventListener("mouseleave", (event) => {
+    //     document.getElementById("proficiency-button-" + i)?.setAttribute('style', 'opacity: 0; transform: translateY(3px)');
+    //     if (i > 0) {
+    //       document.getElementById("proficiency-button-" + (i - 1))?.setAttribute('style', "opacity: 0");
+    //     }
+    //     if (i > 1) {
+    //       document.getElementById("proficiency-button-" + (i - 2))?.setAttribute('style', "opacity: 0");
+    //     }
+    //     if (i < 17) {
+    //       document.getElementById("proficiency-button-" + (i + 1))?.setAttribute('style', "opacity: 0");
+    //     }
+    //     if (i < 16) {
+    //       document.getElementById("proficiency-button-" + (i + 2))?.setAttribute('style', "opacity: 0");
+    //     }
+    //   })
+    // }
   }
 
   ngAfterViewInit(): void {
@@ -134,6 +147,7 @@ export class EditOtherInfoComponent implements OnInit {
       let languageToAdd = '';
       if (newLanguage) {
         languageToAdd = newLanguage;
+        this.newLanguage = '';
       } else if (this.newLanguage !== '') {
         languageToAdd = this.newLanguage;
         this.newLanguage = '';
@@ -293,5 +307,29 @@ export class EditOtherInfoComponent implements OnInit {
         }
       }
     }
+  }
+
+  addAttack() {
+    if (this.character) {
+      let newAttack: Attack = {
+        name: "",
+        range: 5,
+        atkBonus: 0,
+        rolls: 1,
+        damageDice: 6,
+        damageBonus: 0,
+        type: "Slashing"
+      }
+      if (this.character.attacks) {
+        this.character.attacks.push(newAttack)
+      } else {
+        this.character.attacks = Array<Attack>();
+        this.character.attacks.push(newAttack)
+      }
+    }
+  }
+
+  removeAttack(index: number) {
+    this.character?.attacks?.splice(index, 1);
   }
 }

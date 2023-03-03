@@ -6,4 +6,5 @@ export interface Attack {
   damageDice: number;
   damageBonus: number;
   type: string;
+  desc?: string;
 }

@@ -28,15 +28,15 @@ export interface Character {
 
   // Other info
   attacks?: Attack[];
-  currency?: {
+  currency: {
     copper: number;
     silver: number;
     electrum: number;
     gold: number;
     platinum: number;
   };
-  equipment?: string[];
-  traits?: string[];
+  equipment?: string;
+  traits?: string;
   proficiencies: {
     acrobatics: number;
     animalHandling: number;
@@ -58,7 +58,7 @@ export interface Character {
     survival: number;
   };
   skills?: string[];
-  languages?: string[];
+  languages: string[];
 
 
 }

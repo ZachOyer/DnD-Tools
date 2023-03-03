@@ -19,7 +19,7 @@
     </ul>
     <div id="myTabContent" class="tab-content mb-2">
 
-      <div class="tab-pane fade active show" style="position: relative" id="proficiency" role="tabpanel">
+      <div *ngIf="character" class="tab-pane fade active show" style="position: relative" id="proficiency" role="tabpanel">
         <h4 class="my-2 ps-3 prof-bonus" *ngIf="character">Proficiency Bonus: {{calcProficiencyBonus(character.level)}}</h4>
         <div class="row mx-0 text-center">
           <div class="col-2">
@@ -39,8 +39,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('acrobatics', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('acrobatics', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.acrobatics}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.acrobatics === 1, 'font-2': character.proficiencies.acrobatics === 2, 'font-3': character.proficiencies.acrobatics > 2}">
+            {{character.proficiencies.acrobatics}}
           </div>
           <div class="col-3">
             Acrobatics
@@ -54,8 +54,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('animal handling', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('animal handling', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.animalHandling}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.animalHandling === 1, 'font-2': character.proficiencies.animalHandling === 2, 'font-3': character.proficiencies.animalHandling > 2}">
+            {{character.proficiencies.animalHandling}}
           </div>
           <div class="col-3">
             Animal Handling
@@ -69,8 +69,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('arcana', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('arcana', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.arcana}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.arcana === 1, 'font-2': character.proficiencies.arcana === 2, 'font-3': character.proficiencies.arcana > 2}">
+            {{character.proficiencies.arcana}}
           </div>
           <div class="col-3">
             Arcana
@@ -84,8 +84,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('athletics', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('athletics', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.athletics}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.athletics === 1, 'font-2': character.proficiencies.athletics === 2, 'font-3': character.proficiencies.athletics > 2}">
+            {{character.proficiencies.athletics}}
           </div>
           <div class="col-3">
             Athletics
@@ -99,8 +99,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('deception', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('deception', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.deception}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.deception === 1, 'font-2': character.proficiencies.deception === 2, 'font-3': character.proficiencies.deception > 2}">
+            {{character.proficiencies.deception}}
           </div>
           <div class="col-3">
             Deception
@@ -114,8 +114,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('history', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('history', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.history}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.history === 1, 'font-2': character.proficiencies.history === 2, 'font-3': character.proficiencies.history > 2}">
+            {{character.proficiencies.history}}
           </div>
           <div class="col-3">
             History
@@ -129,8 +129,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('insight', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('insight', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.insight}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.insight === 1, 'font-2': character.proficiencies.insight === 2, 'font-3': character.proficiencies.insight > 2}">
+            {{character.proficiencies.insight}}
           </div>
           <div class="col-3">
             Insight
@@ -144,8 +144,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('intimidation', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('intimidation', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.intimidation}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.intimidation === 1, 'font-2': character.proficiencies.intimidation === 2, 'font-3': character.proficiencies.intimidation > 2}">
+            {{character.proficiencies.intimidation}}
           </div>
           <div class="col-3">
             Intimidation
@@ -159,8 +159,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('investigation', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('investigation', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.investigation}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.investigation === 1, 'font-2': character.proficiencies.investigation === 2, 'font-3': character.proficiencies.investigation > 2}">
+            {{character.proficiencies.investigation}}
           </div>
           <div class="col-3">
             Investigation
@@ -174,8 +174,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('medicine', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('medicine', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.medicine}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.medicine === 1, 'font-2': character.proficiencies.medicine === 2, 'font-3': character.proficiencies.medicine > 2}">
+            {{character.proficiencies.medicine}}
           </div>
           <div class="col-3">
             Medicine
@@ -189,8 +189,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('nature', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('nature', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.nature}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.nature === 1, 'font-2': character.proficiencies.nature === 2, 'font-3': character.proficiencies.nature > 2}">
+            {{character.proficiencies.nature}}
           </div>
           <div class="col-3">
             Nature
@@ -204,8 +204,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('perception', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('perception', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.perception}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.perception === 1, 'font-2': character.proficiencies.perception === 2, 'font-3': character.proficiencies.perception > 2}">
+            {{character.proficiencies.perception}}
           </div>
           <div class="col-3">
             Perception
@@ -219,8 +219,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('performance', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('performance', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.performance}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.performance === 1, 'font-2': character.proficiencies.performance === 2, 'font-3': character.proficiencies.performance > 2}">
+            {{character.proficiencies.performance}}
           </div>
           <div class="col-3">
             Performance
@@ -234,8 +234,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('persuasion', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('persuasion', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.persuasion}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.persuasion === 1, 'font-2': character.proficiencies.persuasion === 2, 'font-3': character.proficiencies.persuasion > 2}">
+            {{character.proficiencies.persuasion}}
           </div>
           <div class="col-3">
             Persuasion
@@ -249,8 +249,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('religion', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('religion', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.religion}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.religion === 1, 'font-2': character.proficiencies.religion === 2, 'font-3': character.proficiencies.religion > 2}">
+            {{character.proficiencies.religion}}
           </div>
           <div class="col-3">
             Religion
@@ -264,8 +264,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('sleight of hand', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('sleight of hand', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.sleightOfHand}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.sleightOfHand === 1, 'font-2': character.proficiencies.sleightOfHand === 2, 'font-3': character.proficiencies.sleightOfHand > 2}">
+            {{character.proficiencies.sleightOfHand}}
           </div>
           <div class="col-3">
             Sleight Of Hand
@@ -279,8 +279,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('stealth', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('stealth', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.stealth}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.stealth === 1, 'font-2': character.proficiencies.stealth === 2, 'font-3': character.proficiencies.stealth > 2}">
+            {{character.proficiencies.stealth}}
           </div>
           <div class="col-3">
             Stealth
@@ -294,8 +294,8 @@
             <button class="btn btn-sm btn-outline-success prof-increase me-2" (click)="changeProficiency('survival', true)"><fa-icon [icon]="faImprove"></fa-icon></button>
             <button class="btn btn-sm btn-outline-danger prof-decrease" (click)="changeProficiency('survival', false)"><fa-icon [icon]="faWorsen"></fa-icon></button>
           </div>
-          <div class="col-3">
-            {{character?.proficiencies?.survival}}
+          <div class="col-3" [ngClass]="{'font-1': character.proficiencies.survival === 1, 'font-2': character.proficiencies.survival === 2, 'font-3': character.proficiencies.survival > 2}">
+            {{character.proficiencies.survival}}
           </div>
           <div class="col-3">
             Survival
@@ -307,25 +307,111 @@
       </div>
 
       <div class="tab-pane fade" id="attacks" role="tabpanel">
-        <div class="row text-center">
-          <div class="col">Name</div>
-          <div class="col">Range</div>
-          <div class="col-auto">Attack Bonus</div>
-          <div class="col">Rolls</div>
-          <div class="col">Dice size</div>
-          <div class="col-auto">Damage Bonus</div>
-          <div class="col">Type</div>
-        </div>
-        <div class="row">
-
+        <!-- <div class="row mx-0" *ngIf="character">
+          <div class="attack-card-container col-6" *ngFor="let attack of character.attacks">
+            <div class="attack-card text-center row mx-0" (click)="testing = !testing">
+              <h2 class="attack-name col-12">{{attack.name}}</h2>
+              <div class="col-12">Type: {{attack.type}}</div>
+              <div class="col-6">Dice: D{{attack.damageDice}}</div>
+              <div class="col-6">Rolls: {{attack.rolls}}</div>
+              <div>Bonus: {{attack.damageBonus}}</div>
+              <div>Hit: {{attack.atkBonus}}</div>
+              <div>Range: {{attack.range}}</div>
+            </div>
+          </div>
+        </div> -->
+        <div class="accordion" id="accordionExample" *ngIf="character">
+          <div class="accordion-item" *ngFor="let attack of character.attacks; let i = index" @flattenInOut>
+            <h2 class="accordion-header" id="heading{{i}}">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" aria-controls="collapseOne">
+                {{attack.name !== "" ? attack.name : "- New Attack -"}}
+              </button>
+            </h2>
+            <div id="collapse{{i}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body row mx-0 pb-5">
+                <div class="form-group col-9">
+                  <label for="attackName{{i}}" class="form-label ps-2">Attack Name</label>
+                  <input class="form-control" id="attackName{{i}}" placeholder="Fisticuffs are for losers anyway..." [(ngModel)]="attack.name">
+                </div>
+                <div class="col-3">
+                  <button class="w-100 btn btn-sm btn-outline-danger" style="margin-top: 32px" (click)="removeAttack(i)">Remove</button>
+                </div>
+                <div class="form-group col-6">
+                  <label for="range{{i}}" class="form-label ps-2 mt-3">Range</label>
+                  <input class="form-control" type="number" id="range{{i}}" [(ngModel)]="attack.range">
+                </div>
+                <div class="form-group col-6">
+                  <label for="typeSelect{{i}}" class="form-label ps-2 mt-3">Type</label>
+                  <select class="form-select" id="typeSelect{{i}}" [(ngModel)]="attack.type">
+                    <option>Acid</option>
+                    <option>Bludgeoning</option>
+                    <option>Cold</option>
+                    <option>Fire</option>
+                    <option>Force</option>
+                    <option>Lightning</option>
+                    <option>Necrotic</option>
+                    <option>Piercing</option>
+                    <option>Poison</option>
+                    <option>Psychic</option>
+                    <option>Radiant</option>
+                    <option>Slashing</option>
+                    <option>Thunder</option>
+                  </select>
+                </div>
+                <div class="form-group col-6">
+                  <label for="rollsSelect{{i}}" class="form-label ps-2 mt-3">Rolls</label>
+                  <select class="form-select" id="rollsSelect{{i}}" [(ngModel)]="attack.rolls">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                  </select>
+                </div>
+                <div class="form-group col-6">
+                  <label for="diceSizeSelect{{i}}" class="form-label ps-2 mt-3">Dice Size</label>
+                  <select class="form-select" id="diceSizeSelect{{i}}" [(ngModel)]="attack.damageDice">
+                    <option>4</option>
+                    <option>6</option>
+                    <option>8</option>
+                    <option>10</option>
+                    <option>12</option>
+                    <option>20</option>
+                    <option>100</option>
+                  </select>
+                </div>
+                <div class="form-group col-6">
+                  <label for="damageBonus{{i}}" class="form-label ps-2 mt-3">Damage Bonus</label>
+                  <input class="form-control" type="number" id="damageBonus{{i}}" [(ngModel)]="attack.damageBonus">
+                </div>
+                <div class="form-group col-6">
+                  <label for="hitBonus{{i}}" class="form-label ps-2 mt-3">Hit Bonus</label>
+                  <input class="form-control" type="number" id="hitBonus{{i}}" [(ngModel)]="attack.atkBonus">
+                </div>
+                <div class="form-group col-12">
+                  <label for="desc{{i}}" class="form-label ps-2 mt-3">Description</label>
+                  <textarea class="form-control" id="desc{{i}}"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <div class="add-weapon" (click)="addAttack()">
+                <div class="add-weapon-icon"><fa-icon [icon]="faAdd"></fa-icon></div><div class="add-weapon-text">Add Attack</div>
+              </div>
+            </h3>
+          </div>
         </div>
       </div>
+
       <div class="tab-pane fade" id="languages" role="tabpanel">
         <div class="row mt-2">
           <div class="col-6">
             <h4 class="text-center">Current Languages</h4>
             <div class="row mx-0 my-3 language-option" @languageAnim *ngFor="let language of character?.languages; let i = index">
-              <div class="col-12">{{language}}</div>
+              <div class="col-12 language-name">{{language}}</div>
               <div class="remove-button" (click)="removeLanguage(i)" type="button"><fa-icon [icon]="faRemove"></fa-icon></div>
             </div>
             <div class="row mx-0 my-3">

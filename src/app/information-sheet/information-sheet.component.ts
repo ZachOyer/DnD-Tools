@@ -8,6 +8,7 @@ import { EditBasicInfoModalComponent } from '../edit-info-modals/edit-basic-info
 import { EditStatsModalComponent } from '../edit-info-modals/edit-stats-modal/edit-stats-modal.component';
 import { EditBattleStatsComponent } from '../edit-info-modals/edit-battle-stats/edit-battle-stats.component';
 import { EditOtherInfoComponent } from '../edit-info-modals/edit-other-info/edit-other-info.component';
+import { Character } from '../shared/character.model';
 
 @Component({
   selector: 'app-information-sheet',
@@ -64,14 +65,14 @@ export class InformationSheetComponent implements OnInit {
   // ---------------------------------------------------------------
 
   currentCharacterIndex: number;
-  characters: any;
+  characters: Array<Character>;
 
 
   constructor(private charService: CharacterService,
               private bsModalService: BsModalService,
               private bsModalRef: BsModalRef,
               private ref: ChangeDetectorRef) {
-    this.characters = undefined;
+    this.characters = [];
     this.currentCharacterIndex = 0;
   }
 
@@ -163,23 +164,25 @@ export class InformationSheetComponent implements OnInit {
   }
 
   convertDown(currency: string) {
-    if (currency === 'silver' && this.characters[this.currentCharacterIndex].currency.silver > 0) {
-      this.characters[this.currentCharacterIndex].currency.silver -= 1;
-      this.characters[this.currentCharacterIndex].currency.copper += 10;
-    } else if (currency === 'electrum' && this.characters[this.currentCharacterIndex].currency.electrum > 0) {
-      this.characters[this.currentCharacterIndex].currency.electrum -= 1;
-      this.characters[this.currentCharacterIndex].currency.silver += 5;
-    } else if (currency === 'gold' && this.includeElectrum && this.characters[this.currentCharacterIndex].currency.gold > 0) {
-      this.characters[this.currentCharacterIndex].currency.gold -= 1;
-      this.characters[this.currentCharacterIndex].currency.electrum += 2;
-    } else if (currency === 'gold' && !this.includeElectrum && this.characters[this.currentCharacterIndex].currency.gold > 0) {
-      this.characters[this.currentCharacterIndex].currency.gold -= 1;
-      this.characters[this.currentCharacterIndex].currency.silver += 10;
-    } else if (currency === 'plat' && this.characters[this.currentCharacterIndex].currency.platinum > 0) {
-      this.characters[this.currentCharacterIndex].currency.platinum -= 1;
-      this.characters[this.currentCharacterIndex].currency.gold += 10;
+    if (this.characters[this.currentCharacterIndex].currency !== undefined) {
+      if (currency === 'silver' && this.characters[this.currentCharacterIndex].currency.silver > 0) {
+        this.characters[this.currentCharacterIndex].currency.silver -= 1;
+        this.characters[this.currentCharacterIndex].currency.copper += 10;
+      } else if (currency === 'electrum' && this.characters[this.currentCharacterIndex].currency.electrum > 0) {
+        this.characters[this.currentCharacterIndex].currency.electrum -= 1;
+        this.characters[this.currentCharacterIndex].currency.silver += 5;
+      } else if (currency === 'gold' && this.includeElectrum && this.characters[this.currentCharacterIndex].currency.gold > 0) {
+        this.characters[this.currentCharacterIndex].currency.gold -= 1;
+        this.characters[this.currentCharacterIndex].currency.electrum += 2;
+      } else if (currency === 'gold' && !this.includeElectrum && this.characters[this.currentCharacterIndex].currency.gold > 0) {
+        this.characters[this.currentCharacterIndex].currency.gold -= 1;
+        this.characters[this.currentCharacterIndex].currency.silver += 10;
+      } else if (currency === 'plat' && this.characters[this.currentCharacterIndex].currency.platinum > 0) {
+        this.characters[this.currentCharacterIndex].currency.platinum -= 1;
+        this.characters[this.currentCharacterIndex].currency.gold += 10;
+      }
+      this.updateInfo();
     }
-    this.updateInfo();
   }
 
   convertCurrency() {
@@ -199,7 +202,7 @@ export class InformationSheetComponent implements OnInit {
     this.updateInfo();
   }
 
-  numRows(input: string) {
+  numRows(input: string | undefined) {
     if (!input || (input.match(/\n/g) || [])?.length < 5) {
       return 5;
     } else if ((input.match(/\n/g) || [])?.length > 23) {
@@ -270,12 +273,17 @@ export class InformationSheetComponent implements OnInit {
   }
 
   changeOtherInfo(openTo?: number) {
-    this.bsModalRef = this.bsModalService.show(EditOtherInfoComponent, {class: 'modal-lg modal-dialog-centered'});
+    this.bsModalRef = this.bsModalService.show(EditOtherInfoComponent, {class: 'modal-lg modal-dialog-centered', backdrop: 'static'});
     let testing = structuredClone(this.characters[this.currentCharacterIndex]);
     this.bsModalRef.content.character = testing;
     if (openTo) {
       this.bsModalRef.content.openToTab = openTo;
     }
+    this.bsModalRef.content.updateOtherInfo.subscribe((character: Character) => {
+      this.characters[this.currentCharacterIndex] = character;
+      this.updateInfo();
+      this.ref.detectChanges();
+    })
   }
 
   calcProficiencyBonus(level: number) {
