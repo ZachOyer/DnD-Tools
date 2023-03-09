@@ -2,7 +2,6 @@ import { Attack } from "./attack";
 
 export interface Character {
   // Basic info
-  id: number;
   name: string;
   class: string;
   level: number;
@@ -27,7 +26,7 @@ export interface Character {
   speed: number;
 
   // Other info
-  attacks?: Attack[];
+  attacks: Attack[];
   currency: {
     copper: number;
     silver: number;
@@ -35,8 +34,8 @@ export interface Character {
     gold: number;
     platinum: number;
   };
-  equipment?: string;
-  traits?: string;
+  equipment: string;
+  traits: string;
   proficiencies: {
     acrobatics: number;
     animalHandling: number;

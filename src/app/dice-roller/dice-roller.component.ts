@@ -90,7 +90,6 @@ export class DiceRollerComponent implements OnInit {
     }
     this.diceValue += this.modifier;
     this.setRollType();
-    console.log(this.numRolls)
   }
 
   rollAdvantage() {

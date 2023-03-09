@@ -23,7 +23,7 @@
     </div>
     <br>
     <div>
-      <label for="numRolls" style="font-family: 'Montserrat', sans-serif">Number of dice</label>
+      <label for="numRolls" class="montserrat">Number of dice</label>
       <br>
       <span class="input-group-text d-inline" style="width: max-content; padding-bottom: 9px; padding-top: 9px"><fa-icon [icon]="faRolls"></fa-icon></span>
       <select #numRoll (change)="setRolls(numRoll.value)" id="numRoll" class="form-select d-inline" style="width: 100px">
@@ -43,7 +43,7 @@
     </div>
     <br>
 
-    <label for="modifier-input" style="font-family: 'Montserrat', sans-serif">Modifier</label>
+    <label for="modifier-input" class="montserrat">Modifier</label>
     <div class="input-group mx-auto mb-3">
       <span class="input-group-text"><fa-icon [icon]="faModifier"></fa-icon></span>
       <input id="modifier-input" type="number" class="form-control" [(ngModel)]="modifier">

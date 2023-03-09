@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { faArrowsDownToPeople, faArrowUpWideShort, faBolt, faBrain, faCircleArrowUp, faCircleCheck, faCircleLeft, faCoins, faCommentSlash, faDice, faFilePen, faHandFist, faHeart, faMasksTheater, faMinus, faPersonHiking, faPersonRunning, faPlus, faRotate, faSackXmark, faScroll, faShield, faSlash, faWandMagic, faWandMagicSparkles, faWandSparkles } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsDownToPeople, faArrowUpWideShort, faBolt, faBrain, faCircleArrowUp, faCircleCheck, faCircleLeft, faCoins, faCommentSlash, faDice, faFilePen, faHandFist, faHeart, faMasksTheater, faMinus, faPersonHiking, faPersonRunning, faPlus, faRotate, faSackXmark, faScroll, faShield, faSlash, faTurnUp, faWandMagic, faWandMagicSparkles, faWandSparkles } from '@fortawesome/free-solid-svg-icons';
 import { faCircle, faCircleDot, faCircleRight } from '@fortawesome/free-regular-svg-icons';
 import { CharacterService } from '../character/character.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -57,6 +57,7 @@ export class InformationSheetComponent implements OnInit {
   faNoSpeak = faCommentSlash;
   faAdd = faPlus;
   faRemove = faMinus;
+  faPointUp = faTurnUp;
 
   includeElectrum = true;
 
@@ -85,6 +86,12 @@ export class InformationSheetComponent implements OnInit {
     document.documentElement.style.setProperty("--duration", "2s");
   }
 
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.updateInfo();
+  }
+
   getMod(stat: number): number {
     return Math.floor(stat / 2) - 5;
   }
@@ -106,7 +113,7 @@ export class InformationSheetComponent implements OnInit {
   }
 
   updateInfo() {
-    console.log("Saving data");
+    this.charService.setCurrentCharacterIndex(this.currentCharacterIndex);
     this.charService.updateCharacters(this.characters);
   }
 

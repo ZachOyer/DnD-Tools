@@ -1,17 +1,3 @@
-@import ../information-sheet/information-sheet.component
-
-.middle
-  margin-top: 20vh
-  margin-bottom: 10vh
-
-.fancy-font
-  font-family: 'Montserrat', sans-serif
-
-.new
-  transition: color 0.5s ease-in-out
-  color: #1ed1bc
-  font-size: 20px
-
 .btn-outline-secondary
   border-radius: 10px
   width: 210px
@@ -30,30 +16,148 @@
   &:hover
     box-shadow: rgba(111, 66, 193, 0.4) -5px 5px, rgba(111, 66, 193, 0.3) -10px 10px, rgba(111, 66, 193, 0.2) -15px 15px, rgba(111, 66, 193, 0.1) -20px 20px, rgba(111, 66, 193, 0.05) -25px 25px
 
-.magic-ball
-  width: 300px
-  height: 300px
-  border-radius: 50%
-  transition: all 1s ease-in-out
-  box-shadow: inset 0 0 50px #0d1d49, inset 20px 0 80px #f0f, inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff, 0 0 30px #0d1d49, -10px 0 60px #f0f, 10px 0 60px #0ff
+.card-container
+  font-family: 'Montserrat', sans-serif
+  position: relative
+  height: 700px
+
+.character-card
+  transition: all 0.7s ease
+  background-color: #1a072c
+  position: absolute
+  width: 500px
+  top: 50%
+  border: 1px solid #8400ff8c
+  box-shadow: 0px 0px 15px #8400ff8c, -10px 10px 20px 0px black
+  transform: translate(-50%, -50%)
+  text-align: center
+  border-radius: 10px
+  &::before
+    content: ''
+    position: absolute
+    width: 99%
+    height: 99%
+    top: 0.5%
+    right: 0.5%
+    border: 1px solid #8400ff8c
+    border-radius: 15%
+    z-index: -1
+
+.character-card.hoverable:hover
+  transform: translate(-50%, -53%) rotateY(5deg) rotateX(10deg)
+  box-shadow: 0px 0px 15px #8400ff8c, -10px 15px 30px 10px black
+
+.select-char
+  display: flex
+  justify-content: center
+  align-items: center
+  cursor: pointer
+  height: 100px
+  color: #33ff0096
+  text-shadow: 0px 0px 10px #33ff006c
+  border-bottom: 1px solid white
+  transition: all 0.3s ease-in-out
+  width: max-content
+  font-weight: 500
+  font-style: italic
   &:hover
-    transform: translateY(-5px)
-    box-shadow: inset 0 0 30px #0d1d49, inset 20px 0 60px #f0f, inset -20px 0 60px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff, 0 0 50px #0d1d49, -10px 0 80px #f0f, 10px 0 80px #0ff
+    color: #33ff00
+    text-shadow: 0px 0px 20px #33ff00
 
-.test
-  transition: all 1.5s ease-in-out
-  transform: translateY(-12px)
-  box-shadow: inset 0 0 30px #0d1d49, inset 20px 0 60px #f0f, inset -20px 0 60px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff, 0 0 200px #0d1d49, -10px 0 300px #f0f, 10px 0 300px #0ff
+.delete-char
+  display: flex
+  justify-content: center
+  align-items: center
+  cursor: pointer
+  height: 100px
+  color: #ad1c1c
+  text-shadow: 0px 0px 10px #ff2424ad
+  transition: all 0.3s ease-in-out
+  width: max-content
+  font-weight: 500
+  font-style: italic
+  &:hover
+    color: #ff2222
+    text-shadow: 0px 0px 20px #ff2424
 
-.magic-ball:hover .new
-  color: #90fff2
+.change-buttons
+  z-index: 2
+  display: flex
+  align-items: center
 
-.background-curtains
-  opacity: 0.5
-  z-index: -100
-  position: fixed
-  height: 100%
+.prev-button
   width: 100%
-  transform: translateY(-5px)
+  padding-left: 25%
+  font-size: 5rem
+  transition: all 0.3s ease-out
+  opacity: 0.2
+
+.next-button
+  width: 100%
+  padding-right: 25%
+  text-align: right
+  font-size: 5rem
+  transition: all 0.3s ease-out
+  opacity: 0.2
+
+.next-button.hoverable
+  cursor: pointer
+  opacity: 1
+  &:hover
+    padding-right: 10%
+
+.prev-button.hoverable
+  cursor: pointer
+  opacity: 1
+  &:hover
+    padding-left: 10%
+
+.h-mc
+  height: max-content
+
+.character-name
+  font-family: 'Roboto Slab', serif
+
+.character-info
+  font-family: 'Oswald', sans-serif
+
+.arrow
+  animation: point 2s ease-in-out infinite
+  font-size: 1.5em
+  color: white
+
+.no-characters
+  position: absolute
+  top: 50%
+  text-align: center
+  transform: translateY(-50%)
+  font-weight: 400
+  font-style: italic
+  font-size: 1.5em
+  opacity: 0.4
+  color: white
 
 
+@-webkit-keyframes point
+  0%,
+  100%
+    -webkit-transform: translateY(0)
+    -ms-transform: translateY(0)
+    transform: translateY(0)
+  50%
+    -webkit-transform: translateY(-7px)
+    -ms-transform: translateY(-7px)
+    transform: translateY(-7px)
+
+@keyframes point
+  0%,
+  100%
+    -webkit-transform: translateY(0)
+    -ms-transform: translateY(0)
+    transform: translateY(0)
+  50%
+    -webkit-transform: translateY(-7px)
+    -ms-transform: translateY(-7px)
+    transform: translateY(-7px)
+
+// Screen cutoff should be 880px

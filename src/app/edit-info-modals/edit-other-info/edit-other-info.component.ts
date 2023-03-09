@@ -104,11 +104,7 @@ export class EditOtherInfoComponent implements OnInit {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     setTimeout(() => {
-      // if (this.character) {
-      //   console.log(Object.keys(this.character.proficiencies));
-      // }
       if (this.openToTab === 1) {
-        // console.log("Opening to Attacks");
         document.getElementById('attacksTab')?.click();
       } else if (this.openToTab === 2) {
         document.getElementById('languagesTab')?.click();
@@ -135,14 +131,6 @@ export class EditOtherInfoComponent implements OnInit {
   }
 
   addLanguage(newLanguage?: string) {
-    const ele = document.getElementById('add-icon');
-    if (ele) {
-      ele.classList.add('spin')
-      ele.addEventListener('animationend', () => {
-        ele.classList.remove('spin');
-      });
-    }
-
     if (this.character !== null) {
       let languageToAdd = '';
       if (newLanguage) {

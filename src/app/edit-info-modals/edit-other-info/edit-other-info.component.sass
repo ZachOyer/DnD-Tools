@@ -29,6 +29,8 @@
 h1
   width: 100%
   font-family: 'Montserrat', sans-serif
+  font-weight: 300
+  font-style: italic
   color: white
   border-bottom: 2px solid cyan
   display: inline-block
@@ -120,6 +122,7 @@ h1
     box-shadow: 0px 0px 8px 3px #00000042
 
 .language-text, .proficiency-option
+  font-weight: 300
   transition: color 0.3s ease-in-out
 
 div:hover ~ .language-text, .proficiency-option:hover
@@ -131,7 +134,7 @@ div:hover ~ .language-text, .proficiency-option:hover
 .proficiency-buttons
   opacity: 0
   transform: translateY(3px)
-  transition: all 0.15s ease-in-out
+  transition: all 0.2s ease-out
 
 .proficiency-buttons .btn
   box-shadow: 0px 5px 10px 3px black
@@ -159,15 +162,15 @@ div:hover ~ .language-text, .proficiency-option:hover
   transform: translateY(3px)
 
 .font-1
-  font-weight: bold
+  font-weight: 400
   color: #aaffaa
 
 .font-2
-  font-weight: bold
+  font-weight: 500
   color: #74ff74
 
 .font-3
-  font-weight: bold
+  font-weight: 700
   color: #00ff00
 
 // --------------------- Attacks tab styling ---------------------
@@ -178,7 +181,7 @@ div:hover ~ .language-text, .proficiency-option:hover
 
 .accordion-button
   font-size: 1.1rem
-  font-weight: bold
+  font-weight: 500
 
 .accordion-button:focus
   box-shadow: none
@@ -187,6 +190,7 @@ div:hover ~ .language-text, .proficiency-option:hover
   overflow-y: hidden
 
 .add-weapon
+  cursor: pointer
   position: relative
   display: flex
   align-items: center

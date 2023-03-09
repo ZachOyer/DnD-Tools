@@ -1,0 +1,12 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h1 class="mt-2">Delete character</h1>
+    <button style="color: white;" class='btn close-button close' (click)="closeModal(false)" type="button" aria-label="Close">
+      <fa-icon [icon]="faClose"></fa-icon>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <div class="mt-2 mb-4" style="font-size: 1.2em">Are you sure you want to delete this character?</div>
+    <div class="float-right"><button class="btn btn-outline-success me-3" (click)="closeModal(true)">Goodbye {{characterName}}</button><button class="btn btn-outline-danger" (click)="closeModal(false)">Cancel</button></div>
+  </div>
+</div>

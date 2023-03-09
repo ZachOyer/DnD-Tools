@@ -8,9 +8,8 @@ import { Character } from '../shared/character.model';
 export class CharacterService {
 
   currentCharacterIndex: number = 0;
-  characters = [
+  characters: Character[] = [
     {
-    id: 0,
     name: "Thunk",
     class: "Barbarian",
     level: 3,
@@ -111,6 +110,7 @@ export class CharacterService {
       platinum: 0
     },
     equipment: "Great Axe\n2 Hand Axes\nExplorers Pack\n4 Javelins\nFine Clothes",
+    traits: "",
     languages: [
       "Common",
       "Elvish",
@@ -120,7 +120,6 @@ export class CharacterService {
     ]
   },
   {
-    id: 1,
     name: "Grass",
     class: "Mage",
     level: 3,
@@ -158,9 +157,19 @@ export class CharacterService {
       stealth: 1,
       survival: 1,
     },
+    attacks: [],
+    currency: {
+      copper: 0,
+      silver: 0,
+      electrum: 0,
+      gold: 0,
+      platinum: 0
+    },
+    equipment: "",
+    traits: "",
+    languages: []
   },
   {
-    id: 2,
     name: "Mae",
     class: "Paladin",
     level: 5,
@@ -199,6 +208,7 @@ export class CharacterService {
       stealth: 1,
       survival: 0,
     },
+    attacks: [],
     currency: {
       copper: 7,
       silver: 2,
@@ -217,7 +227,7 @@ export class CharacterService {
 
   constructor(private http: HttpClient) { }
 
-  updateCharacters(input: any) {
+  updateCharacters(input: Array<Character>) {
     localStorage.setItem('characters', JSON.stringify(input));
   }
 
@@ -225,8 +235,8 @@ export class CharacterService {
     return JSON.parse(localStorage.getItem('characters') || '{}');
   }
 
-  editCharacters(updateChar: Character) {
-  }
+  // editCharacters(updateChar: Character) {
+  // }
 
   setCurrentCharacterIndex(index: number) {
     this.currentCharacterIndex = index;

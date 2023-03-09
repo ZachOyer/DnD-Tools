@@ -1,20 +1,114 @@
 <div class="container">
-  <div class="row text-center mt-4">
-    <div class="row">
-      <div class="section-title mx-auto">Step&nbsp;&nbsp;<fa-icon [icon]="faRollIcon"></fa-icon></div>
-    </div>
-    <div class="row roll-stats" >
-      <button class="btn btn-primary mx-auto mt-2">Roll for stats</button>
-      <div></div>
-    </div>
-
+  <div class="row mt-2 text-center">
+    <h6 class="note"><strong>Note: </strong>You don't need to complete each step to go on to the next one. It simply laid out this way to avoid overwhelming with too much data.</h6>
   </div>
-  <div class="row basic-info"></div>
+  <div class="row mx-0 mt-4 text-center">
+    <div class="section-title mx-auto">Step<fa-icon class="ms-2" [icon]="faStep1"></fa-icon></div>
+    <div class="row mx-0 section-body pt-2 pb-3">
+      <div class="col-12 mb-3">
+        <button class="btn btn-primary mx-auto mt-2">Roll for stats</button>
+      </div>
+      <div class="row stat-headers">
+        <div class="col">
+        </div>
+        <div class="col">
+          <div>&nbsp;</div>
+          <div style="opacity: 0.8">Unassigned</div>
+        </div>
+        <div class="col">
+          <div><fa-icon [icon]="faStr"></fa-icon></div>
+          <div>Strength</div>
+        </div>
+        <div class="col">
+          <div><fa-icon [icon]="faDex"></fa-icon></div>
+          <div>Dexterity</div>
+        </div>
+        <div class="col">
+          <div><fa-icon [icon]="faCon"></fa-icon></div>
+          <div>Constitution</div>
+        </div>
+        <div class="col">
+          <div><fa-icon [icon]="faInt"></fa-icon></div>
+          <div>Intelligence</div>
+        </div>
+        <div class="col">
+          <div><fa-icon [icon]="faWis"></fa-icon></div>
+          <div>Wisdom</div>
+        </div>
+        <div class="col">
+          <div><fa-icon [icon]="faCha"></fa-icon></div>
+          <div>Charisma</div>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+      <div class="row stat-dist">
+        <div class="col">
+          <div class="left-hover"><fa-icon [icon]="faLeft"></fa-icon></div>
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+          <div class="right-hover"><fa-icon [icon]="faRight"></fa-icon></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mx-0 mt-5">
+    <div class="section-title mx-auto text-center">Step<fa-icon class="ms-2" [icon]="faStep2"></fa-icon></div>
+    <div class="row mx-0 section-body pt-2 pb-3">
+      <div class="col">
+        <label class="text-left" for="name">Name</label>
+        <input class="form-control" id="name">
+      </div>
+      <div class="col">
+        <label for="class">Class</label>
+        <input class="form-control" id="class">
+      </div>
+      <div class="col">
+        <label for="level">Level</label>
+        <input class="form-control" id="level" disabled value="1">
+      </div>
+      <div class="col">
+        <label for="background">Background</label>
+        <input class="form-control" id="background">
+      </div>
+      <div class="col">
+        <label for="race">Race</label>
+        <input class="form-control" id="race">
+      </div>
+      <div class="col">
+        <label for="alignment">Alignment</label>
+        <input class="form-control" id="alignment">
+      </div>
+      <div class="col">
+        <label for="class">XP</label>
+        <input class="form-control" id="class" disabled value="0">
+      </div>
+    </div>
+  </div>
+  <div class="row mx-0 mt-4">
+    <div class="row mx-0">
+
+    </div>
+  </div>
   <div class="row mt-3">
-    <div class="col text-center">
+    <div class="col">
       <button class="btn btn-danger" routerLinkActive="active" routerLink="/info-sheet">Cancel</button>
     </div>
-    <div class="col text-center">
+    <div class="col">
       <button class="btn btn-danger" routerLinkActive="active" routerLink="/character-creation">Back</button>
     </div>
   </div>

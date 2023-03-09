@@ -16,9 +16,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CharacterService } from './character/character.service';
 import { CharacterCreationComponent } from './character-creation/character-creation.component';
 import { NewCharacterComponent } from './character-creation/new-character/new-character.component';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { EditBattleStatsComponent } from './edit-info-modals/edit-battle-stats/edit-battle-stats.component';
 import { EditOtherInfoComponent } from './edit-info-modals/edit-other-info/edit-other-info.component';
+import { ConfirmModalComponent } from './character-creation/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { EditOtherInfoComponent } from './edit-info-modals/edit-other-info/edit-
     NewCharacterComponent,
     EditBattleStatsComponent,
     EditOtherInfoComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { EditOtherInfoComponent } from './edit-info-modals/edit-other-info/edit-
     RouterModule,
     FontAwesomeModule,
     HttpClientModule,
+    ModalModule,
   ],
   providers: [CharacterService,
               BsModalRef,
