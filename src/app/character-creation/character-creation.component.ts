@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faArrowDown, faChevronLeft, faChevronRight, faPersonRays, faShare, faUserGear } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { CharacterService } from '../character/character.service';
+import { CharacterService } from '../services/character.service';
 import { Character } from '../shared/character.model';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 

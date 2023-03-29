@@ -10,11 +10,21 @@
 
           <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
-              <li class="nav-item hover-shadow">
+              <li class="nav-item">
                 <a [ngClass]="{'active': router.url.indexOf('dice-roller') !== -1}" class="nav-link" routerLink="/dice-roller">Dice Roller</a>
               </li>
-              <li class="nav-item hover-shadow">
+              <li class="nav-item">
                 <a [ngClass]="{'active': router.url.indexOf('info-sheet') !== -1}" class="nav-link" routerLink="/info-sheet">Information Sheet</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" [ngClass]="{'active': (router.url.indexOf('new-character') !== -1 || router.url.indexOf('manage-characters') !== -1)}" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Characters</a>
+                <div class="dropdown-menu" data-bs-popper="static">
+                  <a class="dropdown-item" routerLink="/manage-characters">Manage</a>
+                  <a class="dropdown-item" routerLink="/new-character">New</a>
+                  <a class="dropdown-item disabled">Enter preconfigured character</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item disabled" href>Import character</a>
+                </div>
               </li>
               <li class="nav-item">
                 <a class="nav-link disabled" href="#">Magic Database</a>

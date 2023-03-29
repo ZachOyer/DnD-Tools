@@ -1,5 +1,5 @@
-<div class="row mx-0">
-  <div class="row mx-0 card-container">
+<div class="row">
+  <div class="row card-container">
     <div class="col-2 change-buttons">
       <div class="prev-button" [ngClass]="{'hoverable': this.charIndex !== 0}" (click)="prevCharacter()"><fa-icon [icon]="faPrev"></fa-icon></div>
     </div>
@@ -18,12 +18,12 @@
       <div class="next-button" [ngClass]="{'hoverable': this.charIndex < (this.characters.length - 1)}" (click)="nextCharacter()"><fa-icon [icon]="faNext"></fa-icon></div>
     </div>
   </div>
-  <div class="row mx-0 text-center" style="min-height: 36px;">
+  <div class="row text-center" style="min-height: 36px;">
     <div class="col-6" *ngIf="this.characters.length < 1" @fadeInTop>
       <div class="arrow"><fa-icon [icon]="faDownArrow"></fa-icon></div>
     </div>
   </div>
-  <div class="row mx-0 text-center">
+  <div class="row text-center">
     <div class="col-6">
       <button class="btn btn-outline-primary" routerLink="/new-character">Create Character</button>
     </div>

@@ -2,6 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { faArrowUp91, faCubes, faDragon, faDungeon } from '@fortawesome/free-solid-svg-icons';
 import { __values } from 'tslib';
+import { RollAttackService } from '../services/roll-attack.service';
 
 @Component({
   selector: 'app-dice-roller',
@@ -34,9 +35,24 @@ export class DiceRollerComponent implements OnInit {
   criticalMiss: boolean = false;
   modifier: number = 0;
   rollType: string = 'ok'
-  constructor() { }
+  constructor(private rollAttack: RollAttackService) { }
 
   ngOnInit(): void {
+    if (this.rollAttack.getDiceSize()) {
+      this.diceSize = this.rollAttack.getDiceSize();
+    }
+    if (this.rollAttack.getNumDice()) {
+      this.numRolls = this.rollAttack.getNumDice();
+    }
+    if (this.rollAttack.getModifier()) {
+      this.modifier = this.rollAttack.getModifier();
+    }
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.rollAttack.clearData();
   }
 
   setDiceSize(size: number) {

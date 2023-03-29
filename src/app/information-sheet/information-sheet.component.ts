@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { faArrowsDownToPeople, faArrowUpWideShort, faBolt, faBrain, faCircleArrowUp, faCircleCheck, faCircleLeft, faCoins, faCommentSlash, faDice, faFilePen, faHandFist, faHeart, faMasksTheater, faMinus, faPersonHiking, faPersonRunning, faPlus, faRotate, faSackXmark, faScroll, faShield, faSlash, faTurnUp, faWandMagic, faWandMagicSparkles, faWandSparkles } from '@fortawesome/free-solid-svg-icons';
 import { faCircle, faCircleDot, faCircleRight } from '@fortawesome/free-regular-svg-icons';
-import { CharacterService } from '../character/character.service';
+import { CharacterService } from '../services/character.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { EditBasicInfoModalComponent } from '../edit-info-modals/edit-basic-info-modal/edit-basic-info-modal.component';
@@ -9,6 +9,10 @@ import { EditStatsModalComponent } from '../edit-info-modals/edit-stats-modal/ed
 import { EditBattleStatsComponent } from '../edit-info-modals/edit-battle-stats/edit-battle-stats.component';
 import { EditOtherInfoComponent } from '../edit-info-modals/edit-other-info/edit-other-info.component';
 import { Character } from '../shared/character.model';
+import { Attack } from '../shared/attack';
+import { DiceRollerComponent } from '../dice-roller/dice-roller.component';
+import { RollAttackService } from '../services/roll-attack.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-information-sheet',
@@ -72,7 +76,9 @@ export class InformationSheetComponent implements OnInit {
   constructor(private charService: CharacterService,
               private bsModalService: BsModalService,
               private bsModalRef: BsModalRef,
-              private ref: ChangeDetectorRef) {
+              private ref: ChangeDetectorRef,
+              private rollAttack: RollAttackService,
+              private router: Router) {
     this.characters = [];
     this.currentCharacterIndex = 0;
   }
@@ -300,5 +306,17 @@ export class InformationSheetComponent implements OnInit {
     return 0;
   }
 
+  rollHit(attack: Attack) {
+    this.rollAttack.setDiceSize(20);
+    this.rollAttack.setNumDice(1);
+    this.rollAttack.setModifier(attack.atkBonus);
+    this.router.navigateByUrl('/dice-roller');
+  }
 
+  rollDamage(attack: Attack) {
+    this.rollAttack.setDiceSize(attack.damageDice);
+    this.rollAttack.setNumDice(attack.rolls);
+    this.rollAttack.setModifier(attack.damageBonus);
+    this.router.navigateByUrl('/dice-roller');
+  }
 }

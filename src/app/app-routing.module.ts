@@ -8,7 +8,7 @@ import { InformationSheetComponent } from './information-sheet/information-sheet
 const routes: Routes = [
   { path: 'dice-roller', component: DiceRollerComponent, data: { animation: 'Dice'}},
   { path: 'info-sheet', component: InformationSheetComponent, data: { animation: 'Info'}},
-  { path: 'character-creation', component: CharacterCreationComponent, data: { animation: 'CharCreation'}},
+  { path: 'manage-characters', component: CharacterCreationComponent, data: { animation: 'CharCreation'}},
   { path: 'new-character', component: NewCharacterComponent, data: {animation: 'NewCharacter'}},
   { path: '', redirectTo: 'dice-roller', pathMatch: 'full'},
   { path: '**', redirectTo: 'dice-roller', pathMatch: 'full'}

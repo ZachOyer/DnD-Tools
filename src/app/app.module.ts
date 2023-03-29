@@ -13,13 +13,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EditBasicInfoModalComponent } from './edit-info-modals/edit-basic-info-modal/edit-basic-info-modal.component';
 import { EditStatsModalComponent } from './edit-info-modals/edit-stats-modal/edit-stats-modal.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CharacterService } from './character/character.service';
+import { CharacterService } from './services/character.service';
 import { CharacterCreationComponent } from './character-creation/character-creation.component';
 import { NewCharacterComponent } from './character-creation/new-character/new-character.component';
 import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { EditBattleStatsComponent } from './edit-info-modals/edit-battle-stats/edit-battle-stats.component';
 import { EditOtherInfoComponent } from './edit-info-modals/edit-other-info/edit-other-info.component';
 import { ConfirmModalComponent } from './character-creation/confirm-modal/confirm-modal.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ConfirmModalComponent } from './character-creation/confirm-modal/confir
     FontAwesomeModule,
     HttpClientModule,
     ModalModule,
+    DragDropModule,
   ],
   providers: [CharacterService,
               BsModalRef,

@@ -2,73 +2,113 @@
   <div class="row mt-2 text-center">
     <h6 class="note"><strong>Note: </strong>You don't need to complete each step to go on to the next one. It simply laid out this way to avoid overwhelming with too much data.</h6>
   </div>
-  <div class="row mx-0 mt-4 text-center">
+  <div class="row mt-4 text-center">
     <div class="section-title mx-auto">Step<fa-icon class="ms-2" [icon]="faStep1"></fa-icon></div>
-    <div class="row mx-0 section-body pt-2 pb-3">
+    <div class="row section-body pt-2">
       <div class="col-12 mb-3">
-        <button class="btn btn-primary mx-auto mt-2">Roll for stats</button>
+        <button type="button" class="btn btn-primary mt-2" (click)="rollStats()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-delay="200" data-bs-original-title="Rolls 4 6-sided die, and uses the 3 highest rolls for each values">Roll new stats</button>
+        <button type="button" class="btn btn-primary ms-2 mt-2" (click)="useStandardSet()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-delay="200" data-bs-original-title="Uses the standard set of 15/14/13/12/10/8">Reset to Standard Set</button>
       </div>
-      <div class="row stat-headers">
-        <div class="col">
+
+      <div class="row" cdkDropListGroup>
+        <div class="col-12 mb-3 overflow-hidden" *ngIf="unassigned.length > 0" @flattenInOut>
+          <h4>Unassigned</h4>
+          <div
+            cdkDropList
+            #unassignedList="cdkDropList"
+            [cdkDropListData]="unassigned"
+            class="drag-list unassigned-list"
+            id="unassignedDropList"
+            (cdkDropListDropped)="drop($event)">
+            <div class="drag-box unassigned-box overflow-hidden" *ngFor="let item of unassigned" cdkDrag>{{item}}</div>
+          </div>
+
+          <div class="note">Drag and drop</div>
         </div>
-        <div class="col">
-          <div>&nbsp;</div>
-          <div style="opacity: 0.8">Unassigned</div>
+
+        <div class="col mb-3">
+          <h6>Strength</h6>
+          <div
+            cdkDropList
+            #strList="cdkDropList"
+            [cdkDropListData]="strength"
+            class="drag-list"
+            id="strDropList"
+            (cdkDropListDropped)="drop($event)">
+            <div class="drag-box" *ngFor="let item of strength" cdkDrag>{{item}}</div>
+          </div>
         </div>
-        <div class="col">
-          <div><fa-icon [icon]="faStr"></fa-icon></div>
-          <div>Strength</div>
+
+        <div class="col mb-3">
+          <h6>Dexterity</h6>
+          <div
+            cdkDropList
+            #dexList="cdkDropList"
+            [cdkDropListData]="dexterity"
+            class="drag-list"
+            id="dexDropList"
+            (cdkDropListDropped)="drop($event)">
+            <div class="drag-box" *ngFor="let item of dexterity" cdkDrag>{{item}}</div>
+          </div>
         </div>
-        <div class="col">
-          <div><fa-icon [icon]="faDex"></fa-icon></div>
-          <div>Dexterity</div>
+
+        <div class="col mb-3">
+          <h6>Constitution</h6>
+          <div
+            cdkDropList
+            #conList="cdkDropList"
+            [cdkDropListData]="constitution"
+            class="drag-list"
+            id="conDropList"
+            (cdkDropListDropped)="drop($event)">
+            <div class="drag-box" *ngFor="let item of constitution" cdkDrag>{{item}}</div>
+          </div>
         </div>
-        <div class="col">
-          <div><fa-icon [icon]="faCon"></fa-icon></div>
-          <div>Constitution</div>
+
+        <div class="col mb-3">
+          <h6>Intelligence</h6>
+          <div
+            cdkDropList
+            #intList="cdkDropList"
+            [cdkDropListData]="intelligence"
+            class="drag-list"
+            id="intDropList"
+            (cdkDropListDropped)="drop($event)">
+            <div class="drag-box" *ngFor="let item of intelligence" cdkDrag>{{item}}</div>
+          </div>
         </div>
-        <div class="col">
-          <div><fa-icon [icon]="faInt"></fa-icon></div>
-          <div>Intelligence</div>
+
+        <div class="col mb-3">
+          <h6>Wisdom</h6>
+          <div
+            cdkDropList
+            #wisList="cdkDropList"
+            [cdkDropListData]="wisdom"
+            class="drag-list"
+            id="wisDropList"
+            (cdkDropListDropped)="drop($event)">
+            <div class="drag-box" *ngFor="let item of wisdom" cdkDrag>{{item}}</div>
+          </div>
         </div>
-        <div class="col">
-          <div><fa-icon [icon]="faWis"></fa-icon></div>
-          <div>Wisdom</div>
-        </div>
-        <div class="col">
-          <div><fa-icon [icon]="faCha"></fa-icon></div>
-          <div>Charisma</div>
-        </div>
-        <div class="col">
-        </div>
-      </div>
-      <div class="row stat-dist">
-        <div class="col">
-          <div class="left-hover"><fa-icon [icon]="faLeft"></fa-icon></div>
-        </div>
-        <div class="col">
-        </div>
-        <div class="col">
-        </div>
-        <div class="col">
-        </div>
-        <div class="col">
-        </div>
-        <div class="col">
-        </div>
-        <div class="col">
-        </div>
-        <div class="col">
-        </div>
-        <div class="col">
-          <div class="right-hover"><fa-icon [icon]="faRight"></fa-icon></div>
+
+        <div class="col mb-3">
+          <h6>Charisma</h6>
+          <div
+            cdkDropList
+            #chaList="cdkDropList"
+            [cdkDropListData]="charisma"
+            class="drag-list"
+            id="chaDropList"
+            (cdkDropListDropped)="drop($event)">
+            <div class="drag-box" *ngFor="let item of charisma" cdkDrag>{{item}}</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row mx-0 mt-5">
+  <div class="row mt-5" *ngIf="currentStep > 1" @fadeInBottom>
     <div class="section-title mx-auto text-center">Step<fa-icon class="ms-2" [icon]="faStep2"></fa-icon></div>
-    <div class="row mx-0 section-body pt-2 pb-3">
+    <div class="row section-body pt-2 pb-3">
       <div class="col">
         <label class="text-left" for="name">Name</label>
         <input class="form-control" id="name">
@@ -99,17 +139,15 @@
       </div>
     </div>
   </div>
-  <div class="row mx-0 mt-4">
-    <div class="row mx-0">
-
-    </div>
-  </div>
   <div class="row mt-3">
-    <div class="col">
-      <button class="btn btn-danger" routerLinkActive="active" routerLink="/info-sheet">Cancel</button>
+    <div class="col text-center">
+      <button class="btn btn-sm btn-danger" routerLink="/info-sheet">Cancel</button>
     </div>
-    <div class="col">
-      <button class="btn btn-danger" routerLinkActive="active" routerLink="/character-creation">Back</button>
+    <div class="col text-center">
+      <button class="btn btn-info btn-lg" (click)="currentStep = currentStep + 1">Next Step</button>
+    </div>
+    <div class="col text-center">
+      <button class="btn btn-sm btn-danger" routerLink="/manage-character">Back</button>
     </div>
   </div>
 </div>
