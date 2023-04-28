@@ -2,8 +2,13 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { faBrain, faChevronLeft, faChevronRight, faDiceOne, faDiceTwo, faHandFist, faHeart, faMasksTheater, faPersonRunning, faScroll } from '@fortawesome/free-solid-svg-icons';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { elementAt } from 'rxjs';
 import { BootstrapService } from 'src/app/services/bootstrap.service';
+import { PredefModalComponent } from '../predef-modal/predef-modal.component';
+import { CharacterService } from 'src/app/services/character.service';
+import { Character } from 'src/app/shared/character.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-character',
@@ -58,7 +63,11 @@ export class NewCharacterComponent implements OnInit {
 
   currentStep = 1;
 
-  constructor(private bs: BootstrapService) { }
+  constructor(private bs: BootstrapService,
+              private bsModalRef: BsModalRef,
+              private bsModalService: BsModalService,
+              private charService: CharacterService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.bs.initializeTooltips();
@@ -138,5 +147,68 @@ export class NewCharacterComponent implements OnInit {
         event.currentIndex,
       );
     }
+  }
+
+  showPredefModal() {
+    this.bsModalRef = this.bsModalService.show(PredefModalComponent, {class: 'modal-md modal-dialog-centered', backdrop: 'static'});
+    this.bsModalRef.content.answer.subscribe((resp: boolean) => {
+      if (resp) {
+        let characters = this.charService.getCharacters();
+        let test: Character = {
+          name: 'NEW CHARACTER',
+          class: '',
+          level: 0,
+          race: '',
+          strength: 10,
+          dexterity: 10,
+          intelligence: 10,
+          constitution: 10,
+          wisdom: 10,
+          charisma: 10,
+          maxHitPoints: 30,
+          hitPoints: 30,
+          armorClass: 0,
+          initiative: 0,
+          speed: 10,
+          attacks: [],
+          currency: {
+            copper: 0,
+            silver: 0,
+            electrum: 0,
+            gold: 0,
+            platinum: 0
+          },
+          equipment: '',
+          traits: '',
+          proficiencies: {
+            acrobatics: 0,
+            animalHandling: 0,
+            arcana: 0,
+            athletics: 0,
+            deception: 0,
+            history: 0,
+            insight: 0,
+            intimidation: 0,
+            investigation: 0,
+            medicine: 0,
+            nature: 0,
+            perception: 0,
+            performance: 0,
+            persuasion: 0,
+            religion: 0,
+            sleightOfHand: 0,
+            stealth: 0,
+            survival: 0,
+          },
+          languages: []
+        }
+        characters.push(test);
+        // console.log(characters);
+        this.charService.updateCharacters(characters);
+        this.charService.setCurrentCharacterIndex(characters.length - 1);
+        this.router.navigateByUrl('info-sheet');
+      }
+    });
+
   }
 }

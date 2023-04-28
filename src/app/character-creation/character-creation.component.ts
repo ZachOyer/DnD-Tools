@@ -108,6 +108,7 @@ export class CharacterCreationComponent implements OnInit {
           this.styleCards();
         }
         this.ref.detectChanges();
+        this.charService.updateCharacters(this.characters);
       }
     })
   }

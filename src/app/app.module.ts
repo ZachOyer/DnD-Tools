@@ -21,6 +21,7 @@ import { EditBattleStatsComponent } from './edit-info-modals/edit-battle-stats/e
 import { EditOtherInfoComponent } from './edit-info-modals/edit-other-info/edit-other-info.component';
 import { ConfirmModalComponent } from './character-creation/confirm-modal/confirm-modal.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { PredefModalComponent } from './character-creation/predef-modal/predef-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     EditBattleStatsComponent,
     EditOtherInfoComponent,
     ConfirmModalComponent,
+    PredefModalComponent,
   ],
   imports: [
     BrowserModule,

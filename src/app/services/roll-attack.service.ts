@@ -8,7 +8,6 @@ export class RollAttackService {
   numDice: any = null;
   modifier: any = null;
 
-
   constructor() { }
 
   clearData() {

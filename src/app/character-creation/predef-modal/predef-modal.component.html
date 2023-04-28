@@ -1,0 +1,17 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h1 class="mt-2">Predefined Character</h1>
+    <button style="color: white;" class='btn close-button close' (click)="closeModal()" type="button" aria-label="Close">
+      <fa-icon [icon]="faClose"></fa-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="desc">If you have a character that you have already created and simply wish to input the data yourself, you can use this option.</div>
+    <br>
+    <div class="desc mb-3">This will add a filler character to your character list and then you will be able to edit the information via the information sheet.</div>
+    <div class="text-center row">
+      <div class="col-6"><button (click)="saveInfo()" class="btn btn-success me-3">Continue</button></div>
+      <div class="col-6"><button (click)="closeModal()" class="btn btn-danger">Cancel</button></div>
+    </div>
+  </div>
+</div>
